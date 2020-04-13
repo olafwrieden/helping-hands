@@ -7,7 +7,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/hello", { method: "GET" })
+    fetch("/api/users/greeting", { method: "GET" })
       .then((res) => res.json())
       .then((response) => {
         setGreeting(response.greeting);

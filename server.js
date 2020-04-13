@@ -1,11 +1,12 @@
 require("dotenv-safe").config();
 const express = require("express");
+const http = require("http");
 const bodyParser = require("body-parser");
 const path = require("path");
 const typeorm = require("typeorm");
 const routes = require("./routes");
 
-// API Server
+// Express App
 const app = express();
 const { PORT, DATABASE_URL } = process.env;
 const EntitySchema = typeorm.EntitySchema;
@@ -28,6 +29,9 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+// Create Server
+const server = http.createServer(app);
+
 const main = async () => {
   // Connect to Database
   typeorm
@@ -45,7 +49,7 @@ const main = async () => {
 
       // Serve Application
       const port = PORT || 9000;
-      app.listen(port, () => {
+      server.listen(port, () => {
         console.log(`----------`);
         console.log(`🚀  Server listening on port ${port}`);
         console.log(`🚀  DB: ${connection.isConnected ? "Ready" : "Failed"}!`);

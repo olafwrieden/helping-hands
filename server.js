@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // API calls
 app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' });
+  res.send({ greeting: 'Hello From Express!' });
 });
 
 app.post('/api/world', (req, res) => {

@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Example <code>Express.js / React.js</code> Heroku Deployment.
+          Example Express.js / React.js (monorepo) Heroku Deployment.
         </p>
         <a
           className="App-link"

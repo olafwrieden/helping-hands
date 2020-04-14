@@ -44,9 +44,6 @@ const main = async () => {
       extra: { ssl: true },
     })
     .then((connection) => {
-      var userRepository = connection.getRepository("User");
-      userRepository.find().then((users) => console.log(users));
-
       // Serve Application
       const port = PORT || 9000;
       server.listen(port, () => {

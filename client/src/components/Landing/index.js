@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-// import { useAuthState } from "../App/Authentication";
 import Hero from "./components/Hero/Hero";
 import HowItWorks from "./components/HowItWorks";
 import OurTeam from "./components/OurTeam";
@@ -24,7 +22,8 @@ const Landing = () => {
 
   return (
     <>
-      <div className="column is-6 is-offset-3">
+      {/* TODO: To be removed in the future. */}
+      <div className="column is-6 is-primary is-offset-3">
         <h1 className="title">Coming Soon</h1>
         <h2 className="subtitle">
           Keep your eyes peeled and hit that refresh button like crazy because
@@ -37,6 +36,7 @@ const Landing = () => {
         <p>User: {user ? JSON.stringify(user) : "no user"}</p>
         <p>isAuthed: {isAuthed ? "Yes!" : "No!"}</p>
       </div>
+
       <Hero />
       <HowItWorks />
       <OurTeam />

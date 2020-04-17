@@ -1,7 +1,7 @@
 {
-  "name": "heroku-monorepo",
+  "name": "helping-hands",
   "version": "1.0.0",
-  "description": "This repo documents how to deploy a React.js + Express.js monorepo to Heroku.",
+  "description": "A HackTheCrisis: NZ App",
   "main": "server.js",
   "scripts": {
     "dev": "run-p dev:**",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/olafwrieden/heroku-monorepo.git"
+    "url": "git+https://github.com/olafwrieden/helping-hands.git"
   },
   "author": "Olaf Wrieden",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/olafwrieden/heroku-monorepo/issues"
+    "url": "https://github.com/olafwrieden/helping-hands/issues"
   },
-  "homepage": "https://github.com/olafwrieden/heroku-monorepo#readme",
+  "homepage": "https://github.com/olafwrieden/helping-hands#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

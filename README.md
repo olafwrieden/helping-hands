@@ -16,3 +16,4 @@ This repo documents how to deploy a React.js + Express.js monorepo to Heroku.
 #### Inspiration
 - [React.js + Express.js Production Deployment](https://github.com/esausilva/react-production-deployment/tree/master/heroku)
 - [A Clean Approach to Using Express Validator](https://dev.to/nedsoft/a-clean-approach-to-using-express-validator-8go)
+- [Node.js Server & Authentication Basics: Express, Sessions, Passport, and cURL](https://medium.com/@evangow/server-authentication-basics-express-sessions-passport-and-curl-359b7456003d)

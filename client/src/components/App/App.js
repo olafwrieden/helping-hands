@@ -1,12 +1,19 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import Router from "./Router";
+import Navigation from "./Navigation";
+import { ProvideAuth} from "./Authentication"
 
 function App() {
   return (
-    <BrowserRouter basename="/">
-      <Router />
-    </BrowserRouter>
+    <ProvideAuth>
+      <BrowserRouter basename="/">
+        <div>
+          <Navigation />
+          <Router />
+        </div>
+      </BrowserRouter>
+    </ProvideAuth>
   );
 }
 

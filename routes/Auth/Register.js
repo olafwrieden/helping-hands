@@ -15,7 +15,7 @@ const registerInputRules = () => {
     body("last_name").isAlpha().isLength({ min: 2 }).trim().escape(),
     body("email", "Invalid email address")
       .isEmail()
-      .normalizeEmail({ all_lowercase: true }),
+      .normalizeEmail({ all_lowercase: true, gmail_remove_dots: false }),
     body("password", "Your password must be at least 6 characters long")
       .isLength({ min: 6 })
       .trim()

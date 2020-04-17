@@ -22,20 +22,22 @@ const Landing = () => {
 
   return (
     <>
-      {/* TODO: To be removed in the future. */}
-      <div className="column is-6 is-primary is-offset-3">
-        <h1 className="title">Coming Soon</h1>
-        <h2 className="subtitle">
-          Keep your eyes peeled and hit that refresh button like crazy because
-          we are moving fast! Watch out for this space.
-        </h2>
-        <p>
-          {isLoading && <>Loading...</>}
-          {greeting && <>API Says: {greeting}</>}
-        </p>
-        <p>User: {user ? JSON.stringify(user) : "no user"}</p>
-        <p>isAuthed: {isAuthed ? "Yes!" : "No!"}</p>
-      </div>
+      {/* TODO: Block to be removed in the future. */}
+      {process.env.NODE_ENV !== "production" && (
+        <div className="column is-6 is-primary is-offset-3">
+          <h1 className="title">Coming Soon</h1>
+          <h2 className="subtitle">
+            Keep your eyes peeled and hit that refresh button like crazy because
+            we are moving fast! Watch out for this space.
+          </h2>
+          <p>
+            {isLoading && <>Loading...</>}
+            {greeting && <>API Says: {greeting}</>}
+          </p>
+          <p>User: {user ? JSON.stringify(user) : "no user"}</p>
+          <p>isAuthed: {isAuthed ? "Yes!" : "No!"}</p>
+        </div>
+      )}
 
       <Hero />
       <HowItWorks />

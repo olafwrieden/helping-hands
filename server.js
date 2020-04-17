@@ -58,7 +58,7 @@ passport.deserializeUser((id, done) => {
 
 // Express App
 const app = express();
-const { PORT, DATABASE_URL } = process.env;
+const { PORT, DATABASE_URL, NODE_ENV } = process.env;
 const EntitySchema = typeorm.EntitySchema;
 app.disable("x-powered-by");
 
@@ -90,7 +90,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
 
   // Handle React Routing: Return all Requests to React
-  app.get("*", function (req, res) {
+  app.get("*", function (_, res) {
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 }
@@ -105,8 +105,8 @@ const main = async () => {
       url: DATABASE_URL,
       type: "postgres",
       entities: [new EntitySchema(require("./entities/User"))],
-      synchronize: true,
-      logging: true,
+      synchronize: false,
+      logging: NODE_ENV !== "production" ? true : false,
       extra: { ssl: true },
     })
     .then((connection) => {

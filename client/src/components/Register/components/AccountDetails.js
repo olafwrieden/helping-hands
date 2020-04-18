@@ -7,7 +7,7 @@ const AccountDetails = ({
   setEmail,
   setPhoneNumber,
   setPassword,
-  setGender
+  setGender,
 }) => {
   return (
     <div className="container">
@@ -40,14 +40,16 @@ const AccountDetails = ({
       </div>
 
       <div className="field">
+        <label className="label">Gender</label>
         <div className="control">
-          <div className="select is-success">
-            <select onChange={(e) => {
-              console.log(e.target.value)
-              setGender(e.target.value)}
-              }>
-            <option name="male" value="male">Male</option>
-            <option name="female" value="female">Female</option>
+          <div className="select">
+            <select onChange={(e) => setGender(e.target.value)}>
+              <option name="male" value="male">
+                Male
+              </option>
+              <option name="female" value="female">
+                Female
+              </option>
             </select>
           </div>
         </div>

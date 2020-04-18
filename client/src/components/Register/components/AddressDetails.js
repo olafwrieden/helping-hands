@@ -29,7 +29,7 @@ const AddressDetails = ({
           <input
             className="input"
             type="text"
-            placeholder="Enter your Zip Code"
+            placeholder="1234"
             name="zipcode"
             id="zipcode"
             minLength="4"

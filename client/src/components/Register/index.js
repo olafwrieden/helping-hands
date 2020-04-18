@@ -1,27 +1,22 @@
-import React, { useState, useHistory } from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import AccountDetails from "./components/AccountDetails";
 import AddressDetails from "./components/AddressDetails";
 import { useAuth } from "../App/Authentication";
 
-const Register = () => {
-  const auth = useAuth()
-  const history = useHistory
+const Register = ({ history }) => {
   let [step, setStep] = useState(0);
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let [gender, setGender] = useState("male")
+  let [gender, setGender] = useState("male");
   let [phoneNumber, setPhoneNumber] = useState("");
-  let [streetAddress, setStreetAddress] = useState("")
-  let [city, setCity] = useState("")
-  let [zipCode, setZipCode] = useState(null);
-
+  let [streetAddress, setStreetAddress] = useState("");
+  let [city, setCity] = useState("");
+  let [zipCode, setZipCode] = useState("");
 
   const handleSubmit = () => {
-    //convert zipcode to number
-    zipCode = +zipCode
     let data = {
       firstName,
       lastName,
@@ -31,22 +26,22 @@ const Register = () => {
       phone: phoneNumber,
       address: streetAddress,
       city,
-      zipCode
+      zipCode,
     };
-    fetch('/api/v1/register', {
-      method: 'POST',
+    fetch("/api/v1/register", {
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-    .then((response) => { 
-      auth.setUser(response)
-          .then(() => history.push('/'))
-    })
-    .catch(err => console.log('error! oh nooo, ', err.message))
-
+      .then((response) => {
+        if (response.ok) {
+          return history.push("/");
+        }
+      })
+      .catch((err) => console.log("error! oh nooo, ", err.message));
   };
 
   const renderStep = (step) => {

@@ -1,9 +1,9 @@
 import * as express from 'express';
 import { getConnection } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { validate } from ('../../../middleware/validator');
+import { validate } from '../../../../middleware/validator';
 import { body } from 'express-validator';
-
+import {Users} from "../../../entity/Users";
 const router = express.Router();
 
 /**
@@ -11,8 +11,8 @@ const router = express.Router();
  */
 const registerInputRules = () => {
   return [
-    body("first_name").isAlpha().isLength({ min: 2 }).trim().escape(),
-    body("last_name").isAlpha().isLength({ min: 2 }).trim().escape(),
+    body("firstName").isAlpha().isLength({ min: 2 }).trim().escape(),
+    body("lastName").isAlpha().isLength({ min: 2 }).trim().escape(),
     body("email", "Invalid email address")
       .isEmail()
       .normalizeEmail({ all_lowercase: true, gmail_remove_dots: false }),
@@ -24,8 +24,9 @@ const registerInputRules = () => {
 };
 
 router.post("/", registerInputRules(), validate, async (req, res) => {
-  const User = getConnection('default').getRepository("User");
-  const { first_name, last_name, email, password } = req.body;
+  const connection = getConnection('default')
+  const User = connection.getRepository<Users>("Users");
+  const { firstName, lastName, email, password } = req.body;
 
   // Does a user with this email already exist?
   const exists = await User.findOne({ email });
@@ -40,14 +41,15 @@ router.post("/", registerInputRules(), validate, async (req, res) => {
 
   // Create User
   const newUser = await User.save({
-    first_name,
-    last_name,
+    firstName,
+    lastName,
     email,
-    password: hashedPassword,
+	password: hashedPassword,
+	enabled: true
   });
 
   // Return User
-  const user = await User.findOne(newUser.id);
+  const user: Users = await User.findOne(newUser.id);
   if (!user) {
     return res.status(500).send({ error: "A new user could not be created." });
   }
@@ -55,4 +57,4 @@ router.post("/", registerInputRules(), validate, async (req, res) => {
   res.send({ user });
 });
 
-module.exports = router;
+export default router;

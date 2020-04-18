@@ -107,11 +107,11 @@ createConnection(
     // In Production, serve React build
     if (process.env.NODE_ENV === "production") {
       // Serve Static Files
-      app.use(express.static(path.join(__dirname, "client/build")));
+      app.use(express.static(path.join(__dirname, "../client/build")));
 
       // Handle React Routing: Return all Requests to React
       app.get("*", function (_, res) {
-      res.sendFile(path.join(__dirname, "client/build", "index.html"));
+      res.sendFile(path.join(__dirname, "../client/build", "index.html"));
       });
     }
 

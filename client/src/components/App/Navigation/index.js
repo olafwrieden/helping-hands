@@ -12,10 +12,9 @@ const Navigation = () => {
       <div className="navbar-brand">
         <Link className="navbar-item" to="/">
           <img
-            src="https://bulma.io/images/bulma-logo.png"
+            src={process.env.PUBLIC_URL + '/logo.png'}
             alt="Bulma: a modern CSS framework based on Flexbox"
-            width="112"
-            height="28"
+            height="30"
           />
         </Link>
         <div

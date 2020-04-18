@@ -60,4 +60,10 @@ export class Users {
 
     @OneToMany(type => Rating, rating => rating.userId)
     ratings: Rating[]
+
+    @Column()
+    isVolunteer: boolean
+
+    @Column()
+    canDrive: boolean
 }

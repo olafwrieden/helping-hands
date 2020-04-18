@@ -15,7 +15,7 @@ const Router = () => (
       <Route path="/logout" component={LogOut} />
       <Route path="/register" component={Register} />
       <ProtectedRoute path="/profile" component={Profile} />
-      <ProtectedRoute path="/buddyList" component={BuddyList} />
+      <ProtectedRoute path="/buddies" component={BuddyList} />
       <Route component={NotFound} />
     </Switch>
   </main>

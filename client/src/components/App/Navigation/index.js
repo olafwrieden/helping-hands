@@ -61,7 +61,7 @@ const Navigation = () => {
                     <Link
                       onClick={() => setIsActive(!isActive)}
                       className="button is-primary is-outlined"
-                      to="/buddyList"
+                      to="/buddies"
                     >
                       My Buddies
                     </Link>

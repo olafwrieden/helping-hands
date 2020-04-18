@@ -39,7 +39,7 @@ const Landing = () => {
         </div>
       )}
 
-      <Hero />
+      <Hero isAuthed={isAuthed} />
       <HowItWorks />
       <OurTeam />
       <Footer />

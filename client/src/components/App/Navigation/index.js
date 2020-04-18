@@ -47,6 +47,14 @@ const Navigation = () => {
                   <p className="control">
                     <Link
                       className="button is-primary is-outlined"
+                      to="/request"
+                    >
+                      New Request
+                    </Link>
+                  </p>
+                  <p className="control">
+                    <Link
+                      className="button is-primary is-outlined"
                       to="/profile"
                     >
                       My Profile

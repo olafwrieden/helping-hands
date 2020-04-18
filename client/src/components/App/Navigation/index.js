@@ -53,6 +53,14 @@ const Navigation = () => {
                     </Link>
                   </p>
                   <p className="control">
+                    <Link
+                      className="button is-primary is-outlined"
+                      to="/buddyList"
+                    >
+                      Buddy List
+                    </Link>
+                  </p>
+                  <p className="control">
                     <Link className="button is-white" to="/logout">
                       <i className="fas fa-power-off"></i>
                     </Link>

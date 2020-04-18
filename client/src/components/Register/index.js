@@ -20,7 +20,7 @@ const Register = () => {
 
 
   const handleSubmit = ({history}) => {
-    //convert postcode to number
+    //convert zipcode to number
     zipCode = +zipCode
     let data = {
       firstName,
@@ -33,15 +33,6 @@ const Register = () => {
       city,
       zipCode
     };
-    // "firstName": "Mitchell",
-    // "lastName": "McDonald",
-    // "email": "test@ttrrtt.com",
-    // "password": "hellow",
-    // "gender": "male",
-    // "phone": "12345",
-    // "address": "123 Stree",
-    // "city": "auckland",
-    // "zipCode": 1234
     fetch('/api/v1/register', {
       method: 'PUT',
       headers: {

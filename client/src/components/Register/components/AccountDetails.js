@@ -39,9 +39,9 @@ const AccountDetails = ({
         </div>
       </div>
 
-      <div class="field">
-        <div class="control">
-          <div class="select is-success">
+      <div className="field">
+        <div className="control">
+          <div className="select is-success">
             <select onChange={(e) => setGender(e.target.value)}>
             <option name="male" value="male">Male</option>
             <option name="female" value="female">Female</option>

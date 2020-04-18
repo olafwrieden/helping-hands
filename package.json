@@ -25,6 +25,7 @@
       "uuid": "^7.0.3"
    },
    "scripts": {
+      "dev": "npm-run-all -p dev:**",
       "start": "node build/server.js",
       "dev:server": "ts-node src/server.ts",
       "dev:app": "cd client && npm start",

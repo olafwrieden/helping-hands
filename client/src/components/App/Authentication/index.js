@@ -25,7 +25,7 @@ function useProvideAuth() {
   }, []);
 
   const signin = (email, password) => {
-    return fetch("/api/login", {
+    return fetch("/api/v1/login", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ email, password }),

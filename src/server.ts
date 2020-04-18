@@ -3,13 +3,16 @@ import "reflect-metadata";
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import {createConnection, getConnection } from "typeorm";
-import {Users} from "./src/entity/Users";
-import routes from "./src/routes/v1/index";
+// import {Users} from "./entity/Users";
+import routes from "./routes/v1/index";
 import * as passport from 'passport';
 import * as passportLocal from "passport-local";
 import * as bcrypt from 'bcrypt';
 import * as session from 'express-session';
 import { v4 } from 'uuid';
+import * as path from 'path';
+import {Users, Buddy, Request, Rating } from './entity/index';
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -83,29 +86,9 @@ createConnection(
     database: process.env.DB_DATABASE,
     synchronize: true,
     logging: process.env.NODE_ENV !== "production" ? true : false,
-    entities: [
-       "src/entity/**/*.ts"
-    ],
-    migrations: [
-       "src/migration/**/*.ts"
-    ],
-    subscribers: [
-       "src/subscriber/**/*.ts"
-    ],
-    cli: {
-       entitiesDir: "src/entity",
-       migrationsDir: "src/migration",
-       subscribersDir: "src/subscriber"
-    }
+    entities: [Users, Buddy, Rating, Request]
  }).then(async connection => {
-  // {
-  //   url: DATABASE_URL,
-  //   type: "postgres",
-  //   entities: [new EntitySchema(require("./entities/User"))],
-  //   synchronize: false,
-  //   logging: NODE_ENV !== "production" ? true : false,
-  //   extra: { ssl: true },
-  // }
+
     app.use(
         session({
             genid: (req) => {
@@ -121,6 +104,17 @@ createConnection(
     app.use(passport.initialize());
     app.use(passport.session());
     
+    // In Production, serve React build
+    if (process.env.NODE_ENV === "production") {
+      // Serve Static Files
+      app.use(express.static(path.join(__dirname, "client/build")));
+
+      // Handle React Routing: Return all Requests to React
+      app.get("*", function (_, res) {
+      res.sendFile(path.join(__dirname, "client/build", "index.html"));
+      });
+    }
+
     app.use('/api/v1', routes)
     
     app.listen(4000, () => {

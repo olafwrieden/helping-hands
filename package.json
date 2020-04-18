@@ -3,8 +3,8 @@
    "version": "0.0.1",
    "description": "Awesome project developed with TypeORM.",
    "devDependencies": {
-      "ts-node": "3.3.0",
-      "typescript": "3.3.3333"
+      "ts-node": "8.8.2",
+      "typescript": "3.8.3"
    },
    "dependencies": {
       "@types/body-parser": "^1.19.0",
@@ -24,6 +24,10 @@
       "uuid": "^7.0.3"
    },
    "scripts": {
-      "start": "ts-node src/index.ts"
+      "start": "node build/server.js",
+      "dev:server": "ts-node src/server.ts",
+      "dev:app": "cd client && npm start",
+      "build": "tsc",
+      "heroku-postbuild": "tsc && cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
    }
 }

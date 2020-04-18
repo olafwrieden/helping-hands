@@ -1,7 +1,7 @@
-const express = require("express");
-const passport = require("passport");
-const { validate } = require("../../middleware/validator");
-const { body } = require("express-validator");
+import * as express from 'express';
+import { validate } from '../../../../middleware/validator';
+import { body } from 'express-validator';
+import * as passport from 'passport';
 
 const router = express.Router();
 
@@ -22,7 +22,6 @@ const loginInputRules = () => {
 
 router.post("/", loginInputRules(), validate, async (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
-    console.log(user, "user");
     if (info) return res.status(401).send(info);
     if (err) {
       return res.status(500).send({ error: "An error occurred!" });
@@ -39,4 +38,4 @@ router.post("/", loginInputRules(), validate, async (req, res, next) => {
   })(req, res, next);
 });
 
-module.exports = router;
+export default router;

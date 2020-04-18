@@ -15,19 +15,42 @@ const Register = () => {
   let [suburb, setSuburb] = useState("");
   let [city, setCity] = useState("");
 
+
   const handleSubmit = () => {
     let data = {
       firstName,
       lastName,
       email,
-      phoneNumber,
+      phone: phoneNumber,
       password,
       canDrive,
-      streetAddress,
+      address: streetAddress,
       suburb,
       city,
     };
-    console.log("Registration Data", data);
+    "firstName": "Mitchell",
+    "lastName": "McDonald",
+    "email": "test@ttrrtt.com",
+    "password": "hellow",
+    "gender": "male",
+    "phone": "12345",
+    "address": "123 Stree",
+    "city": "auckland",
+    "zipCode": 1234
+    fetch('/api/v1/register', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    
+      //make sure to serialize your JSON body
+      body: JSON.stringify(data)
+    })
+    .then( (response) => { 
+       //do something awesome that makes the world a better place
+    });
+
   };
 
   const renderStep = (step) => {

@@ -4,6 +4,10 @@
     text-align: center;
 }
 
+.profile-cover-photo {
+    width: 100%;
+}
+
 .profile-page-avatar {
     border: 2px solid rgba(255,255,255,0.8);
     width: 175px;
@@ -22,7 +26,7 @@
 
 .edit-btn {
     position: absolute;
-    top: 5%;
+    top: 9%;
     right: 5%;
     z-index: 2;
 }
@@ -56,16 +60,28 @@
     z-index: 3;
     top: 10vh;
     position: absolute;
-    left: 0;
-    right: 0;
     padding: 30px;
-    min-width: 280px;
-    max-width: 400px;
     border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    width: 280px;
+    height: 350px;
+    margin-top: -175px; /* Half the height */
+    margin-left: -140px; /* Half the width */
 }
 
 .close-edit-form {
     position: absolute;
     top: 5%;
     right: 5%;
+}
+
+@media screen and (min-width: 600px) {
+    .edit-profile-form {
+        padding-top: 50px;
+        width: 350px;
+        height: 450px;
+        margin-top: -225px; /* Half the height */
+        margin-left: -175px; /* Half the width */
+    }
 }

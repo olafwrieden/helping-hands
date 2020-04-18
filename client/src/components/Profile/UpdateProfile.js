@@ -30,8 +30,8 @@ const UpdateProfile = ({showingEditFunc}) => {
             <label className="label">First Name</label>
             <div className="control has-icons-left">
                 <input onChange={handleChange} className="input" name="first_name" type="text" value={state.first_name} required />
-                <span class="icon is-small is-left">
-                    <i class="fas fa-user"></i>
+                <span className="icon is-small is-left">
+                    <i className="fas fa-user"></i>
                 </span>
             </div>
             </div>
@@ -39,8 +39,8 @@ const UpdateProfile = ({showingEditFunc}) => {
             <label className="label">Last Name</label>
             <div className="control has-icons-left">
                 <input onChange={handleChange} className="input" name="last_name" type="text" value={state.last_name} required />
-                <span class="icon is-small is-left">
-                    <i class="fas fa-user"></i>
+                <span className="icon is-small is-left">
+                    <i className="fas fa-user"></i>
                 </span>
             </div>
             </div>
@@ -48,8 +48,8 @@ const UpdateProfile = ({showingEditFunc}) => {
             <label className="label">Email</label>
             <div className="control has-icons-left">
                 <input onChange={handleChange} className="input" name="email" type="text" value={state.email} required />
-                <span class="icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
+                <span className="icon is-small is-left">
+                    <i className="fas fa-envelope"></i>
                 </span>
             </div>
             </div>

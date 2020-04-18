@@ -6,6 +6,7 @@ import login from './auth/login';
 import logout from './auth/logout';
 import users from './users/user';
 import profile from './users/profile';
+import buddy from './buddy';
 
 let router = express.Router();
 
@@ -21,5 +22,7 @@ router.use('/register', register)
 router.use('/request', request)
 router.use('/login', login)
 router.use('/logout', logout)
+
+router.use('/buddy', buddy);
 
 export default router;

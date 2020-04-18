@@ -25,7 +25,7 @@ const requestSubmissionRules = () => {
     body("details").exists(),
     body("latitude").exists(),
     body("longitude").exists(),
-    body("requestedUserId").exists()
+    body("requestedUser").exists()
   ];
 };
 

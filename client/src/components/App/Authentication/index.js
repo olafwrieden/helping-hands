@@ -16,7 +16,7 @@ function useProvideAuth() {
   const isAuthed = user?.id ? true : false;
 
   useEffect(() => {
-    fetch("/api/profile", {
+    fetch("/api/v1/profile", {
       headers: { "Content-type": "application/json" },
     })
       .then((res) => res.json())

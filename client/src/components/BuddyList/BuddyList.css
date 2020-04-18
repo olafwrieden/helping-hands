@@ -55,12 +55,22 @@
     padding-left: 1vw;
 }
 
+
+
 .has-text-success {
     grid-area: accept;
 }
 
+.has-text-success:hover {
+    cursor: pointer
+}
+
 .has-text-danger {
     grid-area: delete;
+}
+
+.has-text-danger:hover {
+    cursor: pointer
 }
 
 .accepted-del-btn {
@@ -69,4 +79,15 @@
 
 .accepted-title {
     padding-top: 20px;
+}
+
+.details {
+    grid-area: status;
+    justify-self: left;
+    padding-left: 1vw;
+    padding-bottom: 1rem;
+}
+
+.details > span {
+    line-height: 1.8rem;
 }

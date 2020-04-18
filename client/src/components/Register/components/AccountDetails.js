@@ -7,8 +7,7 @@ const AccountDetails = ({
   setEmail,
   setPhoneNumber,
   setPassword,
-  canDrive,
-  setCanDrive,
+  setGender
 }) => {
   return (
     <div className="container">
@@ -37,6 +36,18 @@ const AccountDetails = ({
             id="last_name"
             onChange={(e) => setLastName(e.target.value)}
           />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <div class="select is-success">
+            <select onChange={(e) => setGender(e.target.value)}>
+            <option name="male" value="male">Male</option>
+            <option name="female" value="female">Female</option>
+            <option name="uspecified" value="uspecified">Unspecified</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -80,21 +91,6 @@ const AccountDetails = ({
             id="form-password"
             onChange={(e) => setPassword(e.target.value)}
           />
-        </div>
-      </div>
-
-      <div className="field">
-        <div className="field">
-          <div className="control">
-            <label className="checkbox">
-              <input
-                type="checkbox"
-                onClick={() => setCanDrive(!canDrive)}
-                defaultChecked={canDrive}
-              />{" "}
-              I have a car and can drive.
-            </label>
-          </div>
         </div>
       </div>
 

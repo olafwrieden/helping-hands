@@ -3,8 +3,8 @@ import React from "react";
 const AddressDetails = ({
   setStep,
   setStreetAddress,
-  setSuburb,
   setCity,
+  setZipCode,
   submit,
 }) => {
   return (
@@ -24,15 +24,17 @@ const AddressDetails = ({
       </div>
 
       <div className="field">
-        <label className="label">Suburb</label>
+        <label className="label">Zip Code</label>
         <div className="control">
           <input
             className="input"
             type="text"
-            placeholder="Orakei"
-            name="suburb"
-            id="suburb"
-            onChange={(e) => setSuburb(e.target.value)}
+            placeholder="Enter your Zip Code"
+            name="zipcode"
+            id="zipcode"
+            minLength="4"
+            maxLength="4"
+            onChange={(e) => setZipCode(e.target.value)}
           />
         </div>
       </div>

@@ -16,6 +16,7 @@ import {Users, Buddy, Request, Rating } from './entity/index';
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+const HTTP_PORT = process.env.PORT || 4000;
 
 dotenv.config()
 //Done to allow Users type checking on User type when doing authentication
@@ -117,9 +118,9 @@ createConnection(
 
     app.use('/api/v1', routes)
     
-    app.listen(4000, () => {
+    app.listen(HTTP_PORT, () => {
         console.log(`----------`);
-        console.log(`🚀  Server listening on port 4000`);
+        console.log(`🚀  Server listening on port ${HTTP_PORT}`);
         console.log(`🚀  DB: ${connection.isConnected ? "Ready" : "Failed"}!`);
         console.log(`----------`);
       });

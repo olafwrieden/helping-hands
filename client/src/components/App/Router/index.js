@@ -4,6 +4,7 @@ import Landing from "../../Landing";
 import Login, { LogOut } from "../../Login";
 import Register from "../../Register";
 import Profile from "../../Profile";
+import BuddyList from "../../BuddyList"
 import ProtectedRoute from "../../App/Authentication/ProtectedRoute";
 
 const Router = () => (
@@ -14,6 +15,7 @@ const Router = () => (
       <Route path="/logout" component={LogOut} />
       <Route path="/register" component={Register} />
       <ProtectedRoute path="/profile" component={Profile} />
+      <ProtectedRoute path="/buddyList" component={BuddyList} />
       <Route component={NotFound} />
     </Switch>
   </main>

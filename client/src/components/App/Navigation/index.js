@@ -34,7 +34,7 @@ const Navigation = () => {
         className={`navbar-menu ${isActive ? "is-active" : ""}`}
       >
         <div className="navbar-start">
-          <Link className="navbar-item" to="/">
+          <Link onClick={() => setIsActive(!isActive)} className="navbar-item" to="/">
             Home
           </Link>
         </div>
@@ -46,6 +46,7 @@ const Navigation = () => {
                 <>
                   <p className="control">
                     <Link
+                      onClick={() => setIsActive(!isActive)}
                       className="button is-primary is-outlined"
                       to="/profile"
                     >
@@ -54,6 +55,7 @@ const Navigation = () => {
                   </p>
                   <p className="control">
                     <Link
+                      onClick={() => setIsActive(!isActive)}
                       className="button is-primary is-outlined"
                       to="/buddyList"
                     >
@@ -61,7 +63,7 @@ const Navigation = () => {
                     </Link>
                   </p>
                   <p className="control">
-                    <Link className="button is-white" to="/logout">
+                    <Link onClick={() => setIsActive(!isActive)} className="button is-white" to="/logout">
                       <i className="fas fa-power-off"></i>
                     </Link>
                   </p>
@@ -70,6 +72,7 @@ const Navigation = () => {
                 <>
                   <p className="control">
                     <Link
+                      onClick={() => setIsActive(!isActive)}
                       className="button is-primary is-outlined"
                       to="/register"
                     >
@@ -77,7 +80,7 @@ const Navigation = () => {
                     </Link>
                   </p>
                   <p className="control">
-                    <Link className="button is-primary" to="/login">
+                    <Link onClick={() => setIsActive(!isActive)} className="button is-primary" to="/login">
                       Login
                     </Link>
                   </p>

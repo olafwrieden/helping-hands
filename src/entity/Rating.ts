@@ -4,8 +4,8 @@ import { Users } from "./Users";
 @Entity()
 export class Rating {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
 
     @Column()
     rating: number;
@@ -14,8 +14,8 @@ export class Rating {
     comment: string;
 
     @ManyToOne(type => Users, user => user.id)
-    userId: number
+    userId: string
 
     @ManyToOne(type => Users, user => user.id)
-    reviewerUserId: number
+    reviewerUserId: string
 }

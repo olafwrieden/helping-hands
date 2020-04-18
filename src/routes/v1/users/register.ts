@@ -26,7 +26,7 @@ const registerInputRules = () => {
 router.post("/", registerInputRules(), validate, async (req, res) => {
   const connection = getConnection('default')
   const User = connection.getRepository<Users>("Users");
-  const { firstName, lastName, email, password } = req.body;
+  const { email, password } = req.body;
 
   // Does a user with this email already exist?
   const exists = await User.findOne({ email });
@@ -41,11 +41,8 @@ router.post("/", registerInputRules(), validate, async (req, res) => {
 
   // Create User
   const newUser = await User.save({
-    firstName,
-    lastName,
-    email,
-	password: hashedPassword,
-	enabled: true
+    ...req.body,
+	  password: hashedPassword
   });
 
   // Return User

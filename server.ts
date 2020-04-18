@@ -1,3 +1,4 @@
+import * as dotenv from "dotenv-safe";
 import "reflect-metadata";
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
@@ -13,17 +14,29 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+dotenv.config()
+//Done to allow Users type checking on User type when doing authentication
+declare global {
+  namespace Express {
+      interface User extends Users {}
+
+      interface Request {
+          user?: User;
+      }
+    }
+  }
+
 const LocalStrategy = passportLocal.Strategy;
 
 // Configure Passport.js with Local Strategy
 passport.use(
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-      const User = getConnection('default').getRepository("Users");
+      const User = getConnection('default').getRepository<Users>("Users");
       User.createQueryBuilder()
         .where({ email })
         .addSelect("password", "User_password")
         .getOne()
-        .then((user: Users) => {
+        .then((user) => {
           // Find User by Email
           if (!user) {
             return done(null, false, {
@@ -54,14 +67,45 @@ passport.use(
   
   // Tell Passport How to Deserialize User
   passport.deserializeUser((id, done) => {
-    const User = getConnection('default').getRepository("Users");
+    const User = getConnection('default').getRepository<Users>("Users");
     User.findOne(id)
       .then((user) => done(null, user))
       .catch((error) => done(error, false));
   });
 
-createConnection().then(async connection => {
-
+createConnection(
+  {
+    type: "postgres",
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_HOST),
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_DATABASE,
+    synchronize: true,
+    logging: process.env.NODE_ENV !== "production" ? true : false,
+    entities: [
+       "src/entity/**/*.ts"
+    ],
+    migrations: [
+       "src/migration/**/*.ts"
+    ],
+    subscribers: [
+       "src/subscriber/**/*.ts"
+    ],
+    cli: {
+       entitiesDir: "src/entity",
+       migrationsDir: "src/migration",
+       subscribersDir: "src/subscriber"
+    }
+ }).then(async connection => {
+  // {
+  //   url: DATABASE_URL,
+  //   type: "postgres",
+  //   entities: [new EntitySchema(require("./entities/User"))],
+  //   synchronize: false,
+  //   logging: NODE_ENV !== "production" ? true : false,
+  //   extra: { ssl: true },
+  // }
     app.use(
         session({
             genid: (req) => {

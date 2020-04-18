@@ -4,6 +4,8 @@ import register from './users/register';
 import request from './request/request';
 import login from './auth/login';
 import logout from './auth/logout';
+import users from './users/user';
+import profile from './users/profile';
 
 let router = express.Router();
 
@@ -13,6 +15,8 @@ router.get("/users", async function(req: express.Request, res: express.Response)
 	})
 });
 
+router.use('/profile', profile)
+router.use('/user', users)
 router.use('/register', register)
 router.use('/request', request)
 router.use('/login', login)

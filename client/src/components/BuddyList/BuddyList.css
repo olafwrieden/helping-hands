@@ -32,6 +32,7 @@
     max-height: 100px;
     max-width: 160px;
     justify-self: left;
+    align-self: start;
 }
 
 .full-name .status .has-text-success .has-text-danger {

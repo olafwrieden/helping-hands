@@ -9,7 +9,8 @@ const BuddyList = () => {
             first_name: "Peter",
             last_name: "Parker",
             status: "pending",
-            address: "738 Winter Garden Drive, Forest Hills, Queens, New York 11375"
+            address: "738 Winter Garden Drive, Forest Hills, Queens, New York 11375",
+            phone: "515-2234"
         },
         {
             id: "pk 2",
@@ -17,7 +18,8 @@ const BuddyList = () => {
             first_name: "Harry",
             last_name: "Potter",
             status: "pending",
-            address: "4 Privet Drive, London 439-91"
+            address: "4 Privet Drive, London 439-91",
+            phone: "114-9181"
         },
         {   
             id: "pk 3",
@@ -25,7 +27,8 @@ const BuddyList = () => {
             first_name: "Doctor",
             last_name: "Dolitte",
             status: "accepted",
-            address: "12 Mystery Lane, Fiction City 999-991"
+            address: "12 Mystery Lane, Fiction City 999-991",
+            phone: "123-4567"
         }
     ])
 
@@ -70,7 +73,7 @@ const BuddyList = () => {
                         <div key={`${item.first_name} ${idx}`} className="level card is-mobile buddylist-item">
                             <img className="level-left" width="50" src={item.avatar_image} alt="buddy avatar picture" />
                             <span className="full-name"><strong>{`${item.first_name} ${item.last_name}`}</strong></span> 
-                            <span className="status">Address</span>
+                            <span className="status"><i class="fas fa-home fa-lg"></i>{item.address}<br /> <i class="fas fa-phone fa-lg"></i> {item.phone} </span>
                             <span class="icon is-medium has-text-danger accepted-del-btn">
                                 <i class="fas fa-ban fa-lg"></i>
                             </span>

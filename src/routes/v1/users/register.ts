@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { getConnection } from 'typeorm';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { validate } from '../../../../middleware/validator';
 import { body } from 'express-validator';
 import {Users} from "../../../entity/Users";

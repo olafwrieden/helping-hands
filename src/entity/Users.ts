@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, Timestamp, CreateDateColumn, OneToMany} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Timestamp, CreateDateColumn, OneToMany } from "typeorm";
 import { Rating } from "./Rating";
 
 export enum Gender {
@@ -29,15 +29,15 @@ export class Users {
         enum: Gender
     })
     gender: string;
-    
+
     @Column({
         unique: true
     })
     email: string;
-     
+
     @Column()
     phone: string;
-        
+
     @Column()
     password: string;
 

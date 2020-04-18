@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from "typeorm";
 import { Users } from "./Users";
 
 export enum Type {
@@ -9,8 +9,8 @@ export enum Type {
 }
 
 export enum Status {
-    COMPLETED = "complete",
-    PENDING = "pending",
+	COMPLETED = "complete",
+	PENDING = "pending",
 	ACCEPTED = "accepted",
 	CANCELLED = "cancelled"
 }
@@ -27,7 +27,7 @@ export class Request {
 
 	@PrimaryGeneratedColumn("uuid")
 	id: string;
-	
+
 	@ManyToOne(type => Users, user => user.id)
 	requestedUser: string;
 

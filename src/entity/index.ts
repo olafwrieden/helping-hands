@@ -1,9 +1,9 @@
-import {Users} from './Users';
+import { Users } from './Users';
 import { Buddy } from './Buddy';
 import { Rating } from './Rating';
 import { Request } from './Request';
 
-export { 
+export {
 	Users,
 	Buddy,
 	Rating,

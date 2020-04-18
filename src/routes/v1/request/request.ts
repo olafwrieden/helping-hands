@@ -101,14 +101,14 @@ function submitRequest(data) {
 }
 
 function fulfilRequest(data) {
-  return getRequestRepo().update(data.requestId, { 
+  return getRequestRepo().update(data.requestId, {
     fulfillingUser: data.userId,
     status: Status.ACCEPTED
   })
 }
 
 function completeRequest(requestId) {
-  return getRequestRepo().update(requestId, { 
+  return getRequestRepo().update(requestId, {
     status: Status.COMPLETED
   })
 }

@@ -1,11 +1,11 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from "typeorm";
 import { Users } from "./Users";
 
 export enum Status {
-	ACTIVE = "active",
-	DECLINED = "declined",
-	DEACTIVATED = "deactivated",
-	PENDING = "pending"
+    ACTIVE = "active",
+    DECLINED = "declined",
+    DEACTIVATED = "deactivated",
+    PENDING = "pending"
 }
 
 @Entity()
@@ -18,10 +18,10 @@ export class Buddy {
     connectedAt: number;
 
     @Column({
-		type: "enum",
-		enum: Status,
-		default: Status.PENDING
-	})
+        type: "enum",
+        enum: Status,
+        default: Status.PENDING
+    })
     status: string;
 
     @ManyToOne(type => Users, user => user.id)

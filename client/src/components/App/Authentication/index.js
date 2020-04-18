@@ -39,5 +39,5 @@ function useProvideAuth() {
       .catch((error) => error);
   };
 
-  return { user, isAuthed, signin };
+  return { user, setUser, isAuthed, signin };
 }

@@ -42,10 +42,12 @@ const AccountDetails = ({
       <div className="field">
         <div className="control">
           <div className="select is-success">
-            <select onChange={(e) => setGender(e.target.value)}>
+            <select onChange={(e) => {
+              console.log(e.target.value)
+              setGender(e.target.value)}
+              }>
             <option name="male" value="male">Male</option>
             <option name="female" value="female">Female</option>
-            <option name="uspecified" value="uspecified">Unspecified</option>
             </select>
           </div>
         </div>

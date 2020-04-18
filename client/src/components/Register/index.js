@@ -1,4 +1,4 @@
-import React, { useState, useLocation } from "react";
+import React, { useState, useHistory } from "react";
 import "./Register.css";
 import AccountDetails from "./components/AccountDetails";
 import AddressDetails from "./components/AddressDetails";
@@ -6,20 +6,20 @@ import { useAuth } from "../App/Authentication";
 
 const Register = () => {
   const auth = useAuth()
-
+  const history = useHistory
   let [step, setStep] = useState(0);
   let [firstName, setFirstName] = useState("");
   let [lastName, setLastName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let [gender, setGender] = useState("")
+  let [gender, setGender] = useState("male")
   let [phoneNumber, setPhoneNumber] = useState("");
   let [streetAddress, setStreetAddress] = useState("")
   let [city, setCity] = useState("")
   let [zipCode, setZipCode] = useState(null);
 
 
-  const handleSubmit = ({history}) => {
+  const handleSubmit = () => {
     //convert zipcode to number
     zipCode = +zipCode
     let data = {
@@ -34,7 +34,7 @@ const Register = () => {
       zipCode
     };
     fetch('/api/v1/register', {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -42,10 +42,9 @@ const Register = () => {
       body: JSON.stringify(data)
     })
     .then((response) => { 
-      const {firstname, lastname} = response
-      auth.setUser({firstname, lastname})
+      auth.setUser(response)
+          .then(() => history.push('/'))
     })
-    .then(() => history.push("/"))
     .catch(err => console.log('error! oh nooo, ', err.message))
 
   };

@@ -50,3 +50,22 @@
     padding-inline-start: 0px;
     padding: 0 15px;
 }
+
+.edit-profile-form {
+    position: absolute;
+    z-index: 3;
+    top: 10vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    min-width: 280px;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+.close-edit-form {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}

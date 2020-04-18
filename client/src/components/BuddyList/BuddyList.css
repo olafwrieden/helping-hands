@@ -1,93 +1,91 @@
 .buddylist-container {
-    margin: 0 auto;
-    width: 95%;
-    max-width: 850px;
-    margin-top: 10vh;
+  margin: 0 auto;
+  width: 95%;
+  max-width: 850px;
+  margin-top: 10vh;
 }
 
 .buddylist-container h2 {
-    text-align: center;
+  text-align: center;
 }
 
 .buddylist-container h3 {
-    padding-left: 2vw;
+  padding-left: 2vw;
 }
 
 .buddylist-item {
-    display: grid !important;
-    justify-items: center;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 2fr 4fr 1fr 1fr;
-    grid-template-areas: 
+  display: grid !important;
+  justify-items: center;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 2fr 4fr 1fr 1fr;
+  grid-template-areas:
     "avatar name accept delete"
     "avatar status accept delete";
-    min-height: 100px;
+  min-height: 100px;
 }
 
 .buddylist-item > img {
-    grid-area: avatar;
-    height: 100%;
-    width: 100%;
-    min-width: 100px;
-    max-height: 100px;
-    max-width: 160px;
-    justify-self: left;
-    align-self: start;
+  grid-area: avatar;
+  height: 100%;
+  width: 100%;
+  min-width: 100px;
+  max-height: 100px;
+  max-width: 160px;
+  justify-self: left;
+  align-self: start;
 }
 
 .full-name .status .has-text-success .has-text-danger {
-    margin: 0 auto;
-    display: block;
-    text-align: center;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
 }
 
 .full-name {
-    grid-area: name;
-    font-size: 1.3rem;
-    justify-self: left;
-    padding-left: 1vw;
+  grid-area: name;
+  font-size: 1.3rem;
+  justify-self: left;
+  padding-left: 1vw;
 }
 
 .status {
-    grid-area: status;
-    justify-self: left;
-    align-self: start;
-    padding-left: 1vw;
+  grid-area: status;
+  justify-self: left;
+  align-self: start;
+  padding-left: 1vw;
 }
 
-
-
 .has-text-success {
-    grid-area: accept;
+  grid-area: accept;
 }
 
 .has-text-success:hover {
-    cursor: pointer
+  cursor: pointer;
 }
 
 .has-text-danger {
-    grid-area: delete;
+  grid-area: delete;
 }
 
 .has-text-danger:hover {
-    cursor: pointer
+  cursor: pointer;
 }
 
 .accepted-del-btn {
-    grid-area: 1 / 3 / 3 / 5;
+  grid-area: 1 / 3 / 3 / 5;
 }
 
 .accepted-title {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 .details {
-    grid-area: status;
-    justify-self: left;
-    padding-left: 1vw;
-    padding-bottom: 1rem;
+  grid-area: status;
+  justify-self: left;
+  padding-left: 1vw;
+  padding-bottom: 1rem;
 }
 
 .details > span {
-    line-height: 1.8rem;
+  line-height: 1.8rem;
 }

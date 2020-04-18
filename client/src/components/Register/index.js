@@ -3,6 +3,7 @@ import "./Register.css";
 import AccountDetails from "./components/AccountDetails";
 import AddressDetails from "./components/AddressDetails";
 import { useAuth } from "../App/Authentication";
+import { response } from "express";
 
 const Register = ({ history }) => {
   let [step, setStep] = useState(0);
@@ -15,6 +16,10 @@ const Register = ({ history }) => {
   let [streetAddress, setStreetAddress] = useState("");
   let [city, setCity] = useState("");
   let [zipCode, setZipCode] = useState("");
+  let [canDrive, setCanDrive] = useState(false);
+  let [canVolunteer, setCanVolunteer] = useState(false);
+
+  let { user, setUser } = useAuth;
 
   const handleSubmit = () => {
     let data = {
@@ -27,6 +32,8 @@ const Register = ({ history }) => {
       address: streetAddress,
       city,
       zipCode,
+      canDrive,
+      isVolunteer: canVolunteer,
     };
     fetch("/api/v1/register", {
       method: "POST",
@@ -36,7 +43,8 @@ const Register = ({ history }) => {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => {
+      .then((response) => response.json())
+      .then((respoonse) => {
         if (response.ok) {
           return history.push("/");
         }
@@ -56,6 +64,10 @@ const Register = ({ history }) => {
             setGender={setGender}
             setPhoneNumber={setPhoneNumber}
             setPassword={setPassword}
+            canDrive={canDrive}
+            setCanDrive={setCanDrive}
+            canVolunteer={canVolunteer}
+            setCanVolunteer={setCanVolunteer}
           />
         );
       case 1:

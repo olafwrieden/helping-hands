@@ -18,7 +18,8 @@ const HowItWorks = () => (
         </div>
         <div className="column">
           <img
-            src="https://bulma.dev/placeholder/pictures/bg_16-9.svg?primary=00d1b2"
+            src={process.env.PUBLIC_URL + "/old_people.jpg"}
+            height={371}
             alt=""
           />
         </div>

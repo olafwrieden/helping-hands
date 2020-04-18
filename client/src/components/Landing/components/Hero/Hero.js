@@ -8,8 +8,8 @@ const Hero = () => (
       <div className="container has-text-centered">
         <h1 className="title is-2 is-spaced">How can we help?</h1>
         <p className="subtitle is-4">
-          We are a community-driven group of volunteers you can rely on to shop
-          and deliver your groceries, medicine, mow your lawns... You post the
+          We are a community-driven group of volunteers you can rely on to
+          deliver your groceries, medicine, mow your lawns... You post the
           request, and we do the rest.
         </p>
         <div className="columns is-vcentered">

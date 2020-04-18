@@ -20,6 +20,13 @@
     display: block !important;
 }
 
+.edit-btn {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    z-index: 2;
+}
+
 .profile-firstname {
     margin: 0;
 }

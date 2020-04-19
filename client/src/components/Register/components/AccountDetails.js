@@ -8,6 +8,10 @@ const AccountDetails = ({
   setPhoneNumber,
   setPassword,
   setGender,
+  canDrive,
+  setCanDrive,
+  isVolunteer,
+  setIsVolunteer,
 }) => {
   return (
     <div className="container">
@@ -95,6 +99,32 @@ const AccountDetails = ({
             id="form-password"
             onChange={(e) => setPassword(e.target.value)}
           />
+        </div>
+      </div>
+
+      <div className="field">
+        <div className="control">
+          <label className="checkbox">
+            <input
+              type="checkbox"
+              defaultChecked={canDrive}
+              onChange={() => setCanDrive(!canDrive)}
+            />{" "}
+            I have a car and can drive.
+          </label>
+        </div>
+      </div>
+
+      <div className="field">
+        <div className="control">
+          <label className="checkbox">
+            <input
+              type="checkbox"
+              defaultChecked={isVolunteer}
+              onChange={() => setIsVolunteer(!isVolunteer)}
+            />{" "}
+            I can also volunteer for others.
+          </label>
         </div>
       </div>
 

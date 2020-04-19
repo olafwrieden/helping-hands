@@ -37,7 +37,8 @@ passport.use(
     const User = getConnection('default').getRepository<Users>("Users");
     User.createQueryBuilder()
       .where({ email })
-      .addSelect("password", "User_password")
+      .addSelect('password', 'Users_password')
+      .addSelect('enabled', 'Users_enabled')
       .getOne()
       .then((user) => {
         // Find User by Email

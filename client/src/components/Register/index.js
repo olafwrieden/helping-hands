@@ -15,6 +15,10 @@ const Register = ({ history }) => {
   let [streetAddress, setStreetAddress] = useState("");
   let [city, setCity] = useState("");
   let [zipCode, setZipCode] = useState("");
+  let [canDrive, setCanDrive] = useState(false);
+  let [isVolunteer, setIsVolunteer] = useState(false);
+
+  const { setUser } = useAuth();
 
   const handleSubmit = () => {
     let data = {
@@ -27,7 +31,11 @@ const Register = ({ history }) => {
       address: streetAddress,
       city,
       zipCode,
+      canDrive,
+      isVolunteer,
     };
+
+    // Register User
     fetch("/api/v1/register", {
       method: "POST",
       headers: {
@@ -36,12 +44,15 @@ const Register = ({ history }) => {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => {
-        if (response.ok) {
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.user) {
+          // Set User Context (login)
+          setUser(res.user);
           return history.push("/");
         }
       })
-      .catch((err) => console.log("error! oh nooo, ", err.message));
+      .catch((err) => console.log("Error:", err.message));
   };
 
   const renderStep = (step) => {
@@ -56,6 +67,10 @@ const Register = ({ history }) => {
             setGender={setGender}
             setPhoneNumber={setPhoneNumber}
             setPassword={setPassword}
+            canDrive={canDrive}
+            setCanDrive={setCanDrive}
+            isVolunteer={isVolunteer}
+            setIsVolunteer={setIsVolunteer}
           />
         );
       case 1:

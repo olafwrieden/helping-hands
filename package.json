@@ -13,6 +13,7 @@
   },
   "homepage": "https://github.com/olafwrieden/helping-hands#readme",
   "devDependencies": {
+    "nodemon": "^2.0.3",
     "npm-run-all": "^4.1.5",
     "ts-node": "8.8.2",
     "typescript": "3.8.3"
@@ -38,7 +39,7 @@
   "scripts": {
     "dev": "run-p dev:**",
     "start": "node build/server.js",
-    "dev:server": "ts-node src/server.ts",
+    "dev:server": "nodemon --watch '**/*.ts' --exec 'ts-node' src/server.ts",
     "dev:app": "cd client && npm start",
     "build": "tsc",
     "heroku-postbuild": "tsc && cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"

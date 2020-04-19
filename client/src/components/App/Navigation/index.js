@@ -12,9 +12,10 @@ const Navigation = () => {
       <div className="navbar-brand">
         <Link className="navbar-item" to="/">
           <img
-            src={process.env.PUBLIC_URL + '/logo.png'}
-            alt="Bulma: a modern CSS framework based on Flexbox"
+            src={process.env.PUBLIC_URL + "/logo.png"}
+            alt="Helping Hands Logo"
             height="30"
+            onClick={() => setIsActive(false)}
           />
         </Link>
         <div
@@ -33,7 +34,11 @@ const Navigation = () => {
         className={`navbar-menu ${isActive ? "is-active" : ""}`}
       >
         <div className="navbar-start">
-          <Link className="navbar-item" to="/">
+          <Link
+            className="navbar-item"
+            to="/"
+            onClick={() => setIsActive(false)}
+          >
             Home
           </Link>
         </div>
@@ -55,12 +60,17 @@ const Navigation = () => {
                     <Link
                       className="button is-primary is-outlined"
                       to="/profile"
+                      onClick={() => setIsActive(false)}
                     >
                       My Profile
                     </Link>
                   </p>
                   <p className="control">
-                    <Link className="button is-white" to="/logout">
+                    <Link
+                      className="button is-white"
+                      to="/logout"
+                      onClick={() => setIsActive(false)}
+                    >
                       <i className="fas fa-power-off"></i>
                     </Link>
                   </p>
@@ -71,12 +81,17 @@ const Navigation = () => {
                     <Link
                       className="button is-primary is-outlined"
                       to="/register"
+                      onClick={() => setIsActive(false)}
                     >
                       Register
                     </Link>
                   </p>
                   <p className="control">
-                    <Link className="button is-primary" to="/login">
+                    <Link
+                      className="button is-primary"
+                      to="/login"
+                      onClick={() => setIsActive(false)}
+                    >
                       Login
                     </Link>
                   </p>

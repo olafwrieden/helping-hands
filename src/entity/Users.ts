@@ -2,68 +2,67 @@ import { Entity, PrimaryGeneratedColumn, Column, Timestamp, CreateDateColumn, On
 import { Rating } from "./Rating";
 
 export enum Gender {
-    FEMALE = "female",
-    MALE = "male",
-    OTHER = "other"
+  FEMALE = "female",
+  MALE = "male",
+  OTHER = "other"
 }
+
 @Entity()
 export class Users {
 
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @Column()
-    firstName: string;
+  @Column()
+  firstName: string;
 
-    @Column()
-    lastName: string;
+  @Column()
+  lastName: string;
 
-    @Column({
-        type: "text",
-        nullable: true
-    })
-    bio: string;
+  @Column({
+    type: "text",
+    default: ""
+  })
+  bio: string;
 
-    @Column({
-        type: "enum",
-        enum: Gender
-    })
-    gender: string;
+  @Column({
+    type: "enum",
+    enum: Gender
+  })
+  gender: string;
 
-    @Column({
-        unique: true
-    })
-    email: string;
+  @Column({
+    unique: true
+  })
+  email: string;
 
-    @Column()
-    phone: string;
+  @Column()
+  phone: string;
 
-    @Column()
-    password: string;
+  @Column({ select: false })
+  password: string;
 
-    @Column()
-    address: string;
+  @Column()
+  address: string;
 
-    @Column()
-    city: string;
+  @Column()
+  city: string;
 
-    @Column()
-    zipCode: number
+  @Column()
+  zipCode: number
 
-    @CreateDateColumn()
-    createdOn: string
+  @CreateDateColumn()
+  createdOn: string
 
-    @Column({
-        default: true
-    })
-    enabled: boolean;
+  @Column({ default: true, select: false })
+  enabled: boolean;
 
-    @OneToMany(type => Rating, rating => rating.userId)
-    ratings: Rating[]
+  @OneToMany(type => Rating, rating => rating.userId)
+  ratings: Rating[]
 
-    @Column()
-    isVolunteer: boolean
+  @Column({ default: false })
+  isVolunteer: boolean
 
-    @Column()
-    canDrive: boolean
+  @Column({ default: false })
+  canDrive: boolean
 }

@@ -3,7 +3,7 @@ import { getConnection } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { validate } from '../../../../middleware/validator';
 import { body } from 'express-validator';
-import {Users} from "../../../entity/Users";
+import { Users } from "../../../entity/Users";
 const router = express.Router();
 
 /**
@@ -14,19 +14,35 @@ const registerInputRules = () => {
     body("firstName").isAlpha().isLength({ min: 2 }).trim().escape(),
     body("lastName").isAlpha().isLength({ min: 2 }).trim().escape(),
     body("email", "Invalid email address")
-      .isEmail()
-      .normalizeEmail({ all_lowercase: true, gmail_remove_dots: false }),
+      .isEmail(),
     body("password", "Your password must be at least 6 characters long")
       .isLength({ min: 6 })
       .trim()
       .escape(),
+    body("gender").isIn(["male", "female", "other"]),
+    body("phone").exists().trim(),
+    body("address").exists().trim(),
+    body("city").exists().trim(),
+    body("zipCode").exists().trim(),
   ];
 };
 
 router.post("/", registerInputRules(), validate, async (req, res) => {
   const connection = getConnection('default')
   const User = connection.getRepository<Users>("Users");
-  const { email, password } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    gender,
+    phone,
+    address,
+    city,
+    zipCode,
+    canDrive,
+    isVolunteer
+  } = req.body;
 
   // Does a user with this email already exist?
   const exists = await User.findOne({ email });
@@ -41,8 +57,17 @@ router.post("/", registerInputRules(), validate, async (req, res) => {
 
   // Create User
   const newUser = await User.save({
-    ...req.body,
-	  password: hashedPassword
+    firstName,
+    lastName,
+    email,
+    password: hashedPassword,
+    gender,
+    phone,
+    address,
+    city,
+    zipCode,
+    canDrive,
+    isVolunteer
   });
 
   // Return User
@@ -51,7 +76,7 @@ router.post("/", registerInputRules(), validate, async (req, res) => {
     return res.status(500).send({ error: "A new user could not be created." });
   }
 
-  res.send({ user });
+  res.send({ message: "The new user was successfully registered.", user });
 });
 
 export default router;

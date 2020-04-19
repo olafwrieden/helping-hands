@@ -10,7 +10,7 @@ const Navigation = () => {
   return (
     <nav className="navbar is-fixed-top">
       <div className="navbar-brand">
-      <Link className="navbar-item" to="/">
+        <Link className="navbar-item" to="/">
           <img
             src={process.env.PUBLIC_URL + "/logo.png"}
             alt="Helping Hands Logo"
@@ -50,11 +50,21 @@ const Navigation = () => {
                 <>
                   <p className="control">
                     <Link
+                      onClick={() => setIsActive(!isActive)}
                       className="button is-primary is-outlined"
                       to="/request"
                       onClick={() => setIsActive(false)}
                     >
                       New Request
+                    </Link>
+                  </p>
+                  <p className="control">
+                    <Link
+                      onClick={() => setIsActive(false)}
+                      className="button is-primary is-outlined"
+                      to="/buddies"
+                    >
+                      My Buddies
                     </Link>
                   </p>
                   <p className="control">
@@ -80,6 +90,7 @@ const Navigation = () => {
                 <>
                   <p className="control">
                     <Link
+                      onClick={() => setIsActive(!isActive)}
                       className="button is-primary is-outlined"
                       to="/register"
                       onClick={() => setIsActive(false)}

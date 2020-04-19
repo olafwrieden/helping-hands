@@ -21,18 +21,6 @@ function useProvideAuth() {
     })
       .then((res) => res.json())
       .then((res) => (res?.id ? setUser(res) : setUser(null)));
-    setUser({
-      id: 1,
-      firstName: "Mitchell",
-      lastName: "McDonald",
-      email: "test@ttrrtt.com",
-      password: "hellow",
-      gender: "male",
-      phone: "12345",
-      address: "123 Stree",
-      city: "auckland",
-      zipCode: 1234,
-    });
   }, []);
 
   const signin = (email, password) => {

@@ -20,7 +20,7 @@ function useProvideAuth() {
       headers: { "Content-type": "application/json" },
     })
       .then((res) => res.json())
-      .then((res) => (res?.id ? setUser(res) : setUser(null))); */
+      .then((res) => (res?.id ? setUser(res) : setUser(null)));
     setUser({
       id: 1,
       firstName: "Mitchell",

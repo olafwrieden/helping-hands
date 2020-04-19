@@ -21,11 +21,11 @@ const Profile = () => {
       <div className="column level"></div>
       <div className="column is-four-fifths level profile-wrapper">
         <img className="profile-cover-photo" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80" alt="Cover photo"/>
-        <img className="profile-page-avatar" src="https://cdn.pixabay.com/photo/2017/11/14/13/06/kitty-2948404_960_720.jpg" alt="Profile avatar photo"/>
+        <img className="profile-page-avatar" src="https://images.unsplash.com/photo-1582971805810-b24306e0afe7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="Profile avatar photo"/>
         <div className="card">
         {isAuthed && <button onClick={() => showingEditFunc()} className="button is-success edit-btn"><i className="fa fa-edit"></i></button>}
-        <h2 className="subtitle is-3 profile-firstname">{user.first_name}</h2>
-        {isAuthed && <h2 className="subtitle is-4">{user.email}</h2>}
+        <h2 className="subtitle is-3 profile-firstname">John Smith</h2>
+        {isAuthed && <h2 className="subtitle is-4">JSmith@examplemail.com</h2>}
         <div className="ratings-wrapper">
         <span><strong>Average Rating: </strong></span>
         <ul className="stars-ul">
@@ -38,9 +38,8 @@ const Profile = () => {
         </div>
           <div className="card-content">
             <div className="content">
-            I'm {user.first_name}, I love to volunteer!. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
-              <br />
-              <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+            I'm John, I'm passionate about helping in the local community love to volunteer!.
+            I can help with plumbing, gardening and cooking. I also have a car and can help to pick up groceries and medical supplies.
             </div>
           </div>
         </div>

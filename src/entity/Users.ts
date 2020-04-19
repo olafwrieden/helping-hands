@@ -7,7 +7,7 @@ export enum Gender {
   OTHER = "other"
 }
 
-@Entity({ orderBy: { createdOn: "ASC"} })
+@Entity({ orderBy: { createdOn: "ASC" } })
 export class Users {
 
   @PrimaryGeneratedColumn("uuid")
@@ -21,7 +21,7 @@ export class Users {
 
   @Column({
     type: "text",
-    default: ""
+    default: "I am passionate about helping in the local community and love to volunteer! I can help with plumbing, gardening and shopping. I also have a car and can drive you to your appoitments."
   })
   bio: string;
 

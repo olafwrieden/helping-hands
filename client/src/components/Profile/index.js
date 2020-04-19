@@ -1,58 +1,85 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Profile.css";
 import { useAuth } from "../App/Authentication";
+import UpdateProfile from "./UpdateProfile";
 
 const Profile = () => {
   const { isAuthed, user } = useAuth();
+  const [showingEdit, setShowingEdit] = useState(false);
+  const showingEditFunc = () => setShowingEdit(!showingEdit);
+  //pull in ratings for this user from ratings table
+  const arrayOfRatings = new Array(5).fill(3);
+  //reduce and get average rating
+  const avgRating = Math.round(
+    arrayOfRatings.reduce((acc, c) => acc + c, 0) / arrayOfRatings.length
+  );
+  //make array of length average rating to map over and display stars ul
+  const avgRatingArray = new Array(avgRating).fill(
+    "https://image.flaticon.com/icons/svg/148/148841.svg"
+  );
 
   return (
-    <div className="columns login-hero">
-      <div className="column is-1 level flat"></div>
-      <div className="column is-5 level">
-        <h1 className="title is-1 login-hero-title">Profile</h1>
-        <h2 className="subtitle is-3">Update your details</h2>
-        {isAuthed && <h2 className="subtitle is-3">{user.email}</h2>}
-        <div className="card">
-          <div className="card-image">
-            <figure className="image is-4by3">
-              <img
-                src="https://bulma.io/images/placeholders/1280x960.png"
-                alt="Placeholder"
-              />
-            </figure>
-          </div>
-          <div className="card-content">
-            <div className="media">
-              <div className="media-left">
-                <figure className="image is-48x48">
-                  <img
-                    src="https://bulma.io/images/placeholders/96x96.png"
-                    alt="Placeholder"
-                  />
-                </figure>
-              </div>
-              <div className="media-content">
-                <p className="title is-4">John Smith</p>
-                <p className="subtitle is-6">@johnsmith</p>
-              </div>
+    <>
+      <div className="columns is-vcentred login-hero">
+        {/* provide margin spacing */}
+        <div className="column level"></div>
+        <div className="column is-four-fifths level profile-wrapper">
+          <img
+            className="profile-cover-photo"
+            src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80"
+            alt="Cover photo"
+          />
+          <img
+            className="profile-page-avatar"
+            src="https://images.unsplash.com/photo-1582971805810-b24306e0afe7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            alt="Profile avatar photo"
+          />
+          <div className="card">
+            {isAuthed && (
+              <button
+                onClick={() => showingEditFunc()}
+                className="button is-success edit-btn"
+              >
+                <i className="fa fa-edit"></i>
+              </button>
+            )}
+            <h2 className="subtitle is-3 profile-firstname">
+              {user.firstName} {user.lastName}
+            </h2>
+            {isAuthed && <h2 className="subtitle is-4">{user.email}</h2>}
+            <div className="ratings-wrapper">
+              <span>
+                <strong>Average Rating: </strong>
+              </span>
+              <ul className="stars-ul">
+                {avgRatingArray.length > 0 &&
+                  avgRatingArray.map((star, idx) => (
+                    <img key={idx} width="25" src={star} alt="Image of star" />
+                  ))}
+              </ul>
+              <span>(From {arrayOfRatings.length} Ratings)</span>
             </div>
-
-            <div className="content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              nec iaculis mauris. <a href="/">@bulmaio</a>.<a href="/">#css</a>{" "}
-              <a href="/">#responsive</a>
-              <br />
-              <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+            <div className="card-content">
+              <div className="content">{user.bio}</div>
             </div>
           </div>
         </div>
+        {!isAuthed && (
+          <div className="column login-form">
+            <div className="container"></div>
+          </div>
+        )}
+        {/* provide margin spacing */}
+        <div className="column level"></div>
       </div>
-      <div className="column login-form">
-        <div className="container"></div>
-      </div>
-      <div className="column is-1 level"></div>
-    </div>
+      {/* show update profile form */}
+      {showingEdit && <UpdateProfile showingEditFunc={showingEditFunc} />}
+    </>
   );
 };
+
+{
+  /* <div>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */
+}
 
 export default Profile;

@@ -10,11 +10,12 @@ const Navigation = () => {
   return (
     <nav className="navbar is-fixed-top">
       <div className="navbar-brand">
-      <Link className="navbar-item" to="/">
+        <Link className="navbar-item" to="/">
           <img
-            src={process.env.PUBLIC_URL + '/logo.png'}
-            alt="Bulma: a modern CSS framework based on Flexbox"
+            src={process.env.PUBLIC_URL + "/logo.png"}
+            alt="Helping Hands Logo"
             height="30"
+            onClick={() => setIsActive(false)}
           />
         </Link>
         <div
@@ -34,9 +35,9 @@ const Navigation = () => {
       >
         <div className="navbar-start">
           <Link
-            onClick={() => setIsActive(!isActive)}
             className="navbar-item"
             to="/"
+            onClick={() => setIsActive(false)}
           >
             Home
           </Link>
@@ -51,14 +52,24 @@ const Navigation = () => {
                     <Link
                       onClick={() => setIsActive(!isActive)}
                       className="button is-primary is-outlined"
+                      to="/request"
+                      onClick={() => setIsActive(false)}
+                    >
+                      New Request
+                    </Link>
+                  </p>
+                  <p className="control">
+                    <Link
+                      className="button is-primary is-outlined"
                       to="/profile"
+                      onClick={() => setIsActive(false)}
                     >
                       My Profile
                     </Link>
                   </p>
                   <p className="control">
                     <Link
-                      onClick={() => setIsActive(!isActive)}
+                      onClick={() => setIsActive(false)}
                       className="button is-primary is-outlined"
                       to="/buddies"
                     >
@@ -67,9 +78,9 @@ const Navigation = () => {
                   </p>
                   <p className="control">
                     <Link
-                      onClick={() => setIsActive(!isActive)}
                       className="button is-white"
                       to="/logout"
+                      onClick={() => setIsActive(false)}
                     >
                       <i className="fas fa-power-off"></i>
                     </Link>
@@ -82,15 +93,16 @@ const Navigation = () => {
                       onClick={() => setIsActive(!isActive)}
                       className="button is-primary is-outlined"
                       to="/register"
+                      onClick={() => setIsActive(false)}
                     >
                       Register
                     </Link>
                   </p>
                   <p className="control">
                     <Link
-                      onClick={() => setIsActive(!isActive)}
                       className="button is-primary"
                       to="/login"
+                      onClick={() => setIsActive(false)}
                     >
                       Login
                     </Link>

@@ -8,14 +8,14 @@ export enum Status {
     PENDING = "pending"
 }
 
-@Entity()
+@Entity({ orderBy: { connectedAt: "ASC"} })
 export class Buddy {
 
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
     @CreateDateColumn()
-    connectedAt: number;
+    connectedAt: string;
 
     @Column({
         type: "enum",
@@ -25,8 +25,11 @@ export class Buddy {
     status: string;
 
     @ManyToOne(type => Users, user => user.id)
-    volunteer: string
+    volunteer: string;
 
     @ManyToOne(type => Users, user => user.id)
-    buddy: string
+    buddy: string;
+
+    @Column()
+    initiatedByBuddy: boolean;
 }

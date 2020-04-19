@@ -16,23 +16,11 @@ function useProvideAuth() {
   const isAuthed = user?.id ? true : false;
 
   useEffect(() => {
-    /* fetch("/api/profile", {
+    fetch("/api/v1/profile", {
       headers: { "Content-type": "application/json" },
     })
       .then((res) => res.json())
-      .then((res) => (res?.id ? setUser(res) : setUser(null))); */
-    setUser({
-      id: 1,
-      firstName: "Mitchell",
-      lastName: "McDonald",
-      email: "test@ttrrtt.com",
-      password: "hellow",
-      gender: "male",
-      phone: "12345",
-      address: "123 Stree",
-      city: "auckland",
-      zipCode: 1234,
-    });
+      .then((res) => (res?.id ? setUser(res) : setUser(null)));
   }, []);
 
   const signin = (email, password) => {
@@ -50,5 +38,5 @@ function useProvideAuth() {
       .catch((error) => error);
   };
 
-  return { user, isAuthed, signin };
+  return { user, setUser, isAuthed, signin };
 }

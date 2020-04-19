@@ -1,11 +1,13 @@
 import React from "react";
-import { Route, Switch, Link } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
+import ProtectedRoute from "../../App/Authentication/ProtectedRoute";
 import Landing from "../../Landing";
 import Login, { LogOut } from "../../Login";
-import Register from "../../Register";
 import Profile from "../../Profile";
-import BuddyList from "../../BuddyList"
+import BuddyList from "../../BuddyList";
 import ProtectedRoute from "../../App/Authentication/ProtectedRoute";
+import Register from "../../Register";
+import Request from "../../Request";
 
 const Router = () => (
   <main>
@@ -14,6 +16,7 @@ const Router = () => (
       <Route path="/login" component={Login} />
       <Route path="/logout" component={LogOut} />
       <Route path="/register" component={Register} />
+      <ProtectedRoute path="/request" component={Request} />
       <ProtectedRoute path="/profile" component={Profile} />
       <ProtectedRoute path="/buddies" component={BuddyList} />
       <Route component={NotFound} />

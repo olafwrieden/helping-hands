@@ -1,47 +1,51 @@
-import * as express from 'express';
+import { Router } from 'express';
 import { getConnection } from 'typeorm';
 import { Request, Status } from '../../../entity/Request';
 import { body } from 'express-validator';
 import { validate } from '../../../../middleware/validator';
 
-let router = express.Router();
+let router = Router();
 
-router.get("/", (req, res) => {
-  if (req.isAuthenticated()) {
-    retrieveRequests()
-      .then((requests) => {
-        res.status(200).send(requests)
-      })
+// GET: All Requests
+router.get("/", async (req, res) => {
+  if (!req.isAuthenticated()) {
+    const requests = await getRequestRepo()
+      .createQueryBuilder("request")
+      .loadAllRelationIds()
+      .where('request.fulfillingUser IS NOT NULL')
+      .getMany();
+    return res.send(requests);
   } else {
     res.status(401).send({ message: "Not Authorized" });
   }
 });
 
-
-
+// PUT: Create New Request
 const requestSubmissionRules = () => {
   return [
-    body("type").exists(),
+    body("type").exists().isIn(['assist', 'pickup', 'talk', 'tpa']),
     body("details").exists(),
-    body("latitude").exists(),
-    body("longitude").exists(),
-    body("requestedUserId").exists()
+    body("address").exists(),
+    body("city").exists(),
+    body("zipCode").exists(),
+    body("requestedUser").exists()
   ];
 };
 
-router.put("/submit", requestSubmissionRules(), validate, (req, res) => {
+router.put("/", requestSubmissionRules(), validate, async (req, res) => {
   if (req.isAuthenticated()) {
-    return submitRequest(req.body)
-      .then(() => {
-        return res.status(201).send({ message: "Request successfully created!" })
-      })
+    return getRequestRepo().save({
+      ...req.body,
+      status: Status.PENDING
+    }).then(() => {
+      return res.status(201).send({ message: "success" })
+    }).catch(() => res.status(500).send({ error: "Request creation failed." }));
   } else {
-    res.status(401).send({ message: "Not Authorized" });
+    res.status(401).send({ error: "Not Authorized" });
   }
 });
 
-
-
+// POST: Fulfil Request
 const requestFulfillRules = () => {
   return [
     body("requestId").exists(),
@@ -49,70 +53,39 @@ const requestFulfillRules = () => {
   ];
 };
 
-router.post("/fulfil", requestFulfillRules(), validate, (req, res) => {
+router.post("/fulfil", requestFulfillRules(), validate, async (req, res) => {
   if (req.isAuthenticated()) {
-    return fulfilRequest(req.body)
-      .then(() => {
-        return res.status(201).send({ message: "Request successfully Updated!" })
-      })
+    return await getRequestRepo().update(req.body.requestId, {
+      fulfillingUser: req.body.userId,
+      status: Status.ACCEPTED
+    }).then(() => {
+      return res.status(201).send({ message: "Request successfully updated!" })
+    }).catch(() => res.status(500).send({ error: "Request failed to update." }));
   } else {
-    res.status(401).send({ message: "Not Authorized" });
+    res.status(401).send({ error: "Not Authorized" });
   }
 });
 
-
-
+// POST: Complete Request
 const requestCompleteRules = () => {
   return [
     body("requestId").exists(),
   ];
 };
 
-router.post('/complete', requestCompleteRules(), validate, (req, res) => {
-  if (req.isAuthenticated()) {
-    return completeRequest(req.body.requestId)
-      .then(() => {
-        return res.status(201).send({ message: "Request successfully Updated!" })
-      })
+router.post('/complete', requestCompleteRules(), validate, async (req, res) => {
+  if (!req.isAuthenticated()) {
+    return await getRequestRepo().update(req.body.requestId, {
+      status: Status.COMPLETED
+    }).then(() => {
+      return res.status(201).send({ message: "Request successfully updated!" })
+    }).catch(() => res.status(500).send({ error: "Request failed to update." }));
   } else {
-    res.status(401).send({ message: "Not Authorized" });
+    res.status(401).send({ error: "Not Authorized" });
   }
 })
 
-
-
-function retrieveRequests() {
-  return getRequestRepo()
-    .createQueryBuilder("request")
-    .loadAllRelationIds()
-    .where('request.fulfillingUser IS NOT NULL')
-    .getMany()
-    .then((requests) => {
-      console.log(requests);
-      return requests;
-    });
-}
-
-function submitRequest(data) {
-  return getRequestRepo().save({
-    ...data,
-    status: Status.PENDING
-  });
-}
-
-function fulfilRequest(data) {
-  return getRequestRepo().update(data.requestId, {
-    fulfillingUser: data.userId,
-    status: Status.ACCEPTED
-  })
-}
-
-function completeRequest(requestId) {
-  return getRequestRepo().update(requestId, {
-    status: Status.COMPLETED
-  })
-}
-
+// Helper Function
 function getRequestRepo() {
   return getConnection('default').getRepository<Request>('Request')
 }

@@ -2,62 +2,67 @@ import { Entity, PrimaryGeneratedColumn, Column, Timestamp, CreateDateColumn, On
 import { Rating } from "./Rating";
 
 export enum Gender {
-    FEMALE = "female",
-    MALE = "male",
-    OTHER = "other"
+  FEMALE = "female",
+  MALE = "male",
+  OTHER = "other"
 }
-@Entity()
+
+@Entity({ orderBy: { createdOn: "ASC" } })
 export class Users {
 
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @Column()
-    firstName: string;
+  @Column()
+  firstName: string;
 
-    @Column()
-    lastName: string;
+  @Column()
+  lastName: string;
 
-    @Column({
-        type: "text",
-        nullable: true
-    })
-    bio: string;
+  @Column({
+    type: "text",
+    default: "I am passionate about helping in the local community and love to volunteer! I can help with plumbing, gardening and shopping. I also have a car and can drive you to your appoitments."
+  })
+  bio: string;
 
-    @Column({
-        type: "enum",
-        enum: Gender
-    })
-    gender: string;
+  @Column({
+    type: "enum",
+    enum: Gender
+  })
+  gender: string;
 
-    @Column({
-        unique: true
-    })
-    email: string;
+  @Column({
+    unique: true
+  })
+  email: string;
 
-    @Column()
-    phone: string;
+  @Column()
+  phone: string;
 
-    @Column()
-    password: string;
+  @Column({ select: false })
+  password: string;
 
-    @Column()
-    address: string;
+  @Column()
+  address: string;
 
-    @Column()
-    city: string;
+  @Column()
+  city: string;
 
-    @Column()
-    zipCode: number
+  @Column()
+  zipCode: number
 
-    @CreateDateColumn()
-    createdOn: string
+  @CreateDateColumn()
+  createdOn: string
 
-    @Column({
-        default: true
-    })
-    enabled: boolean;
+  @Column({ default: true, select: false })
+  enabled: boolean;
 
-    @OneToMany(type => Rating, rating => rating.userId)
-    ratings: Rating[]
+  @OneToMany(type => Rating, rating => rating.userId)
+  ratings: Rating[]
+
+  @Column({ default: false })
+  isVolunteer: boolean
+
+  @Column({ default: false })
+  canDrive: boolean
 }

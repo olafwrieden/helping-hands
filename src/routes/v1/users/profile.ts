@@ -4,23 +4,21 @@ import { Users } from '../../../entity/Users';
 
 let router = express.Router();
 
-router.get("/", function(req, res) {
+router.get("/", function (req, res) {
 	if (req.isAuthenticated()) {
-		return getConnection('default')
-		.getRepository<Users>('Users')
-		.createQueryBuilder("user")
-		.select()
-		.whereInIds(req.user.id)
-		.getOne()
-		.then((user) => {
-			delete user.password;
-			return res.status(200).send(user);
-		})
-	  } else {
-		res.status(401).send({ message: "Not Authorized" });
-	  }
+		const connection = getConnection('default')
+		const User = connection.getRepository<Users>("Users");
 
-	
+		// Does user (still) exist?
+		let user = User.findOne(req.user.id)
+		if (!user) return res.status(401).send({ error: "User profile not found." });
+
+		return res.status(200).send(user);
+	} else {
+		res.status(401).send({ error: "Not Authorized" });
+	}
+
+
 });
 
 export default router;

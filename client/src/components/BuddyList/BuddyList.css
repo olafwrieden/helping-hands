@@ -89,3 +89,11 @@
 .details > span {
   line-height: 1.8rem;
 }
+
+.fa-home {
+  margin-right: 5px !important
+}
+
+.fa-phone {
+  margin-right: 5px !important
+}

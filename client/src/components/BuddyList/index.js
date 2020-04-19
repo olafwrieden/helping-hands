@@ -6,31 +6,31 @@ const BuddyList = () => {
     {
       id: 1,
       avatar_image:
-        "https://cdn.pixabay.com/photo/2016/11/13/21/46/sheep-1822137_960_720.jpg",
-      first_name: "Peter",
-      last_name: "Parker",
+        "https://images.unsplash.com/photo-1533992931871-28f779bc0675?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+      first_name: "Imogen",
+      last_name: "Tolley",
       status: "pending",
-      address: "738 Winter Garden Drive, Forest Hills, Queens, New York 11375",
+      address: "738 Country Lane, Hamilton 1135",
       phone: "515-2234",
     },
     {
       id: 2,
       avatar_image:
-        "https://cdn.pixabay.com/photo/2016/10/21/19/45/hedgehog-child-1759027_960_720.jpg",
-      first_name: "Harry",
-      last_name: "Potter",
+      "https://images.pexels.com/photos/788567/pexels-photo-788567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      first_name: "Sherin",
+      last_name: "Goodwill",
       status: "pending",
-      address: "4 Privet Drive, London 439-91",
+      address: "4 Te Uruwera Lane, Taupo 4131",
       phone: "114-9181",
     },
     {
       id: 3,
       avatar_image:
-        "https://cdn.pixabay.com/photo/2016/01/05/17/51/dog-1123016__340.jpg",
-      first_name: "Doctor",
-      last_name: "Dolitte",
+        "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      first_name: "Andrea",
+      last_name: "Anderson",
       status: "accepted",
-      address: "12 Mystery Lane, Fiction City 999-991",
+      address: "11 January Lane, Kingsland 1201",
       phone: "123-4567",
     },
   ]);
@@ -64,13 +64,14 @@ const BuddyList = () => {
           " this buddy request or buddy"
         );
         setBuddies(
-          buddies.map((item, idx) => {
-            if (item.id === id) {
-              return { ...item, status: "pending" };
-            } else {
-              return item;
-            }
-          })
+          buddies.filter(item => item.id !== id)
+          // buddies.map((item, idx) => {
+          //   if (item.id === id) {
+          //     return { ...item, status: "pending" };
+          //   } else {
+          //     return item;
+          //   }
+          // })
         );
         //go to api and remove row where pk equals id
         //update component state with new buddy list in db
@@ -80,7 +81,7 @@ const BuddyList = () => {
   };
   return (
     <div className="buddylist-container">
-      <h2 className="title">Your Buddies</h2>
+      <h2 className="title">My Buddies</h2>
       <h3 className="title is-3">Pending</h3>
       <ul>
         {buddies

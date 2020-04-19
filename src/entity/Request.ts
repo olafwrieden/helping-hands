@@ -21,8 +21,7 @@ export enum PaymentType {
 	NOPAYMENT = "nopayment"
 }
 
-
-@Entity()
+@Entity({ orderBy: { requestedAt: "ASC"} })
 export class Request {
 
 	@PrimaryGeneratedColumn("uuid")
@@ -54,32 +53,41 @@ export class Request {
 	})
 	payment: string;
 
-	@Column({
-		type: "tsrange",
-		transformer: {
-			to: (entityValue) => {
-				return `[${entityValue.start},${entityValue.end})`
-			},
-			from: (databaseValue) => {
-				const ranges = databaseValue.replace(/(\[*)(\)*)(\"*)/g, "").split(',');
-				return {
-					start: ranges[0],
-					end: ranges[1]
-				}
-			}
-		}
-	})
-	completionTimeRange: {
-		start: "string",
-		end: "end"
-	};
+	// @Column({
+	// 	type: "tsrange",
+	// 	transformer: {
+	// 		to: (entityValue) => {
+	// 			return `[${entityValue.start},${entityValue.end})`
+	// 		},
+	// 		from: (databaseValue) => {
+	// 			const ranges = databaseValue.replace(/(\[*)(\)*)(\"*)/g, "").split(',');
+	// 			return {
+	// 				start: ranges[0],
+	// 				end: ranges[1]
+	// 			}
+	// 		}
+	// 	}
+	// })
+	// completionTimeRange: {
+	// 	start: "string",
+	// 	end: "end"
+	// };
 
 	@CreateDateColumn()
 	requestedAt: string;
 
 	@Column()
-	latitude: string;
+	address: string;
 
 	@Column()
-	longitude: string;
+	city: string;
+
+	@Column()
+	zipCode: number
+
+	// @Column()
+	// latitude: string;
+
+	// @Column()
+	// longitude: string;
 }

@@ -19,7 +19,7 @@ router.get("/users", async function(req: express.Request, res: express.Response)
 router.use('/profile', profile)
 router.use('/user', users)
 router.use('/register', register)
-router.use('/request', request)
+router.use('/requests', request)
 router.use('/login', login)
 router.use('/logout', logout)
 

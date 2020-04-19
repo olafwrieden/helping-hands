@@ -11,7 +11,7 @@ const CategorySelector = ({ setCategory }) => {
           <button
             className="box request-btn"
             name="groceries"
-            onClick={() => setCategory("groceries")}
+            onClick={() => setCategory("pickup")}
           >
             <p className="title is-5">Groceries</p>
             <p className="subtitle">Supermarket shopping, fresh produce..</p>
@@ -21,10 +21,10 @@ const CategorySelector = ({ setCategory }) => {
           <button
             className="box request-btn"
             name="medicine"
-            onClick={() => setCategory("medine")}
+            onClick={() => setCategory("talk")}
           >
-            <p className="title is-5">Medicine</p>
-            <p className="subtitle">Medical prescription pickups..</p>
+            <p className="title is-5">Talk</p>
+            <p className="subtitle">A community volunteer to talk to..</p>
           </button>
         </div>
       </div>
@@ -33,19 +33,19 @@ const CategorySelector = ({ setCategory }) => {
           <button
             className="box request-btn"
             name="transport"
-            onClick={() => setCategory("transport")}
+            onClick={() => setCategory("tpa")}
           >
-            <p className="title is-5">Transport Goods</p>
-            <p className="subtitle">Transport something from A to B..</p>
+            <p className="title is-5">3rd Party Assistance</p>
+            <p className="subtitle">Some other kind of help..</p>
           </button>
         </div>
         <div className="column is-half is-narrow">
           <button
             className="box request-btn"
             name="handiwork"
-            onClick={() => setCategory("handiwork")}
+            onClick={() => setCategory("assist")}
           >
-            <p className="title is-5">Handiwork</p>
+            <p className="title is-5">Home Assistance</p>
             <p className="subtitle">A plumber or electrician..</p>
           </button>
         </div>

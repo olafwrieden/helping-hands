@@ -56,9 +56,17 @@ const Details = ({
               <input
                 type="radio"
                 name="answer"
-                onChange={setPaymentMethod("credit-card")}
+                onChange={setPaymentMethod("credit")}
               />{" "}
               Credit Card
+            </label>
+            <label className="radio">
+              <input
+                type="radio"
+                name="answer"
+                onChange={setPaymentMethod("nopayment")}
+              />{" "}
+              Not Applicable
             </label>
           </div>
         </div>

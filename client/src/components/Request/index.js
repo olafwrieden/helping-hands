@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CategorySelector from "./components/CategorySelector";
 import Details from "./components/Details";
+import { useAuth } from "../App/Authentication";
 
 const Request = () => {
   let [step, setStep] = useState(0);
@@ -11,6 +12,8 @@ const Request = () => {
   let [timeFrom, setTimeFrom] = useState();
   let [timeTo, setTimeTo] = useState();
 
+  const { user } = useAuth();
+
   useEffect(() => {
     if (category !== "") {
       setStep(++step);
@@ -19,14 +22,39 @@ const Request = () => {
 
   const handleSubmit = () => {
     let data = {
-      category,
-      description,
-      paymentMethod,
+      requestedUser: user.id,
+      type: category,
+      details: description,
+      payment: paymentMethod,
+      completionTimeRange: {
+        start: timeFrom,
+        end: timeTo,
+      },
       dropoff,
-      timeFrom,
-      timeTo,
+      address: user.address,
+      city: user.city,
+      zipCode: user.zipCode,
     };
-    console.log("User Data", data);
+
+    // Post New Request
+    fetch("/api/v1/requests", {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.error) {
+          return alert("Unable to send request!");
+        }
+        if (res.message === "success") {
+          return alert("Your request for a volunteer has been submitted.");
+        }
+      })
+      .catch((err) => console.log("Error:", err.message));
   };
 
   const renderStep = (step) => {

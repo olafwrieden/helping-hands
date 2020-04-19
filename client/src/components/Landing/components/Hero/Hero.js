@@ -21,7 +21,7 @@ const Hero = ({ isAuthed }) => (
               <span className="icon">
                 <i className="fas fa-hands-helping" />
               </span>
-              <span>I need a hero!</span>
+              <span>{isAuthed ? "New Request" : "I need a hero!"}</span>
             </Link>
           </div>
           <div className="column">
@@ -29,7 +29,7 @@ const Hero = ({ isAuthed }) => (
               <span className="icon">
                 <i className="fas fa-hand-holding-heart" />
               </span>
-              <span>I can Volunteer!</span>
+              <span>{isAuthed ? "Volunteer Map" : "I can Volunteer!"}</span>
             </Link>
           </div>
         </div>

@@ -11,11 +11,11 @@ router.get("/", function (req, res) {
 
 		// Does user (still) exist?
 		let user = User.findOne(req.user.id)
-		if (!user) return res.status(401).send({ message: "User profile not found." });
+		if (!user) return res.status(401).send({ error: "User profile not found." });
 
 		return res.status(200).send(user);
 	} else {
-		res.status(401).send({ message: "Not Authorized" });
+		res.status(401).send({ error: "Not Authorized" });
 	}
 
 

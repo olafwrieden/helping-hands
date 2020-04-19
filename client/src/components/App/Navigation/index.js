@@ -52,6 +52,7 @@ const Navigation = () => {
                     <Link
                       className="button is-primary is-outlined"
                       to="/request"
+                      onClick={() => setIsActive(false)}
                     >
                       New Request
                     </Link>

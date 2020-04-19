@@ -88,37 +88,30 @@ const BuddyList = () => {
           .filter((item) => item.status === "pending")
           .map((item, idx) => {
             return (
-              <>
-                <div
-                  key={`${item.first_name} ${idx}`}
-                  className="level card is-mobile buddylist-item"
+              <div key={idx} className="level card is-mobile buddylist-item">
+                <img
+                  className="level-left"
+                  width="50"
+                  src={item.avatar_image}
+                  alt="buddy avatar picture"
+                />
+                <span className="full-name">
+                  <strong>{`${item.first_name} ${item.last_name}`}</strong>
+                </span>
+                <span className="status">Would like to buddy up with you</span>
+                <span
+                  className="icon is-medium has-text-success"
+                  onClick={() => updateBuddyList(item.id, "accept")}
                 >
-                  <img
-                    className="level-left"
-                    width="50"
-                    src={item.avatar_image}
-                    alt="buddy avatar picture"
-                  />
-                  <span className="full-name">
-                    <strong>{`${item.first_name} ${item.last_name}`}</strong>
-                  </span>
-                  <span className="status">
-                    Would like to buddy up with you
-                  </span>
-                  <span
-                    className="icon is-medium has-text-success"
-                    onClick={() => updateBuddyList(item.id, "accept")}
-                  >
-                    <i className="fas fa-check-square fa-lg"></i>
-                  </span>
-                  <span
-                    className="icon is-medium has-text-danger"
-                    onClick={() => updateBuddyList(item.id, "remove")}
-                  >
-                    <i className="fas fa-ban fa-lg"></i>
-                  </span>
-                </div>
-              </>
+                  <i className="fas fa-check-square fa-lg"></i>
+                </span>
+                <span
+                  className="icon is-medium has-text-danger"
+                  onClick={() => updateBuddyList(item.id, "remove")}
+                >
+                  <i className="fas fa-ban fa-lg"></i>
+                </span>
+              </div>
             );
           })}
       </ul>
@@ -128,38 +121,33 @@ const BuddyList = () => {
           .filter((item) => item.status === "accepted")
           .map((item, idx) => {
             return (
-              <>
-                <div
-                  key={`${item.first_name} ${idx}`}
-                  className="level card is-mobile buddylist-item"
-                >
-                  <img
-                    className="level-left"
-                    width="50"
-                    src={item.avatar_image}
-                    alt="buddy avatar picture"
-                  />
-                  <span className="full-name">
-                    <strong>{`${item.first_name} ${item.last_name}`}</strong>
-                  </span>
-                  <div className="details">
-                    <span>
-                      <i className="fas fa-home fa-lg"></i>
-                      {item.address}
-                    </span>{" "}
-                    <br />
-                    <span>
-                      <i className="fas fa-phone fa-lg"></i> {item.phone}{" "}
-                    </span>
-                  </div>
-                  <span
-                    className="icon is-medium has-text-danger accepted-del-btn"
-                    onClick={() => updateBuddyList(item.id, "remove")}
-                  >
-                    <i className="fas fa-ban fa-lg"></i>
+              <div key={idx} className="level card is-mobile buddylist-item">
+                <img
+                  className="level-left"
+                  width="50"
+                  src={item.avatar_image}
+                  alt="buddy avatar picture"
+                />
+                <span className="full-name">
+                  <strong>{`${item.first_name} ${item.last_name}`}</strong>
+                </span>
+                <div className="details">
+                  <span>
+                    <i className="fas fa-home fa-lg"></i>
+                    {item.address}
+                  </span>{" "}
+                  <br />
+                  <span>
+                    <i className="fas fa-phone fa-lg"></i> {item.phone}{" "}
                   </span>
                 </div>
-              </>
+                <span
+                  className="icon is-medium has-text-danger accepted-del-btn"
+                  onClick={() => updateBuddyList(item.id, "remove")}
+                >
+                  <i className="fas fa-ban fa-lg"></i>
+                </span>
+              </div>
             );
           })}
       </ul>

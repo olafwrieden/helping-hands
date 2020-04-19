@@ -7,7 +7,7 @@ export enum Gender {
   OTHER = "other"
 }
 
-@Entity()
+@Entity({ orderBy: { createdOn: "ASC"} })
 export class Users {
 
   @PrimaryGeneratedColumn("uuid")

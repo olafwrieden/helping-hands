@@ -8,7 +8,7 @@ export enum Status {
     PENDING = "pending"
 }
 
-@Entity()
+@Entity({ orderBy: { connectedAt: "ASC"} })
 export class Buddy {
 
     @PrimaryGeneratedColumn("uuid")

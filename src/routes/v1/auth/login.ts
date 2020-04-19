@@ -1,7 +1,7 @@
-const express = require("express");
-const passport = require("passport");
-const { validate } = require("../../middleware/validator");
-const { body } = require("express-validator");
+import * as express from 'express';
+import { validate } from '../../../../middleware/validator';
+import { body } from 'express-validator';
+import * as passport from 'passport';
 
 const router = express.Router();
 
@@ -11,8 +11,7 @@ const router = express.Router();
 const loginInputRules = () => {
   return [
     body("email", "Invalid email address")
-      .isEmail()
-      .normalizeEmail({ all_lowercase: true }),
+      .isEmail(),
     body("password", "Your password must be at least 6 characters long")
       .isLength({ min: 6 })
       .trim()
@@ -22,16 +21,14 @@ const loginInputRules = () => {
 
 router.post("/", loginInputRules(), validate, async (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
-    console.log(user, "user");
     if (info) return res.status(401).send(info);
-    if (err) {
-      return res.status(500).send({ error: "An error occurred!" });
-    }
+    if (err) return res.status(500).send({ error: err });
     if (!user) {
       return res.send({
         error: "You have entered an invalid email or password.",
       });
     }
+
     req.login(user, (err) => {
       if (err) return next(err);
       return res.send({ user });
@@ -39,4 +36,4 @@ router.post("/", loginInputRules(), validate, async (req, res, next) => {
   })(req, res, next);
 });
 
-module.exports = router;
+export default router;

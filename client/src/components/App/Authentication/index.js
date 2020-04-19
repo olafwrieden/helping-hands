@@ -16,7 +16,7 @@ function useProvideAuth() {
   const isAuthed = user?.id ? true : false;
 
   useEffect(() => {
-    /* fetch("/api/profile", {
+    fetch("/api/v1/profile", {
       headers: { "Content-type": "application/json" },
     })
       .then((res) => res.json())
@@ -36,7 +36,7 @@ function useProvideAuth() {
   }, []);
 
   const signin = (email, password) => {
-    return fetch("/api/login", {
+    return fetch("/api/v1/login", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -50,5 +50,5 @@ function useProvideAuth() {
       .catch((error) => error);
   };
 
-  return { user, isAuthed, signin };
+  return { user, setUser, isAuthed, signin };
 }

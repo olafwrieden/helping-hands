@@ -54,7 +54,7 @@ const Login = ({ history }) => {
                   {/* <Link to="/register">Forgot Password?</Link> */}
                 </div>
 
-                {error && <div class="notification is-danger">{error}</div>}
+                {error && <div className="notification is-danger">{error}</div>}
                 <div className="field is-grouped">
                   <div className="control">
                     <button
@@ -86,18 +86,36 @@ const Login = ({ history }) => {
   );
 };
 
-export const LogOut = () => (
-  <section className="section">
-    <div className="container">
-      <div class="columns login-hero">
-        <div class="column is-1 level flat"></div>
-        <div class="column is-5 level">
-          <h1 class="title is-1 login-hero-title">Log Out</h1>
-          <h2 class="subtitle is-3">This feature is not available.</h2>
+export const LogOut = ({ history }) => {
+  fetch("/api/v1/logout", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return history.push("/");
+      }
+    })
+    .catch((err) => {
+      return history.push("/");
+    });
+
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="columns login-hero">
+          <div className="column is-1 level flat"></div>
+          <div className="column is-5 level">
+            <h1 className="title is-1 login-hero-title">Logging Out</h1>
+            <h2 className="subtitle is-3">This feature is not available.</h2>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Login;

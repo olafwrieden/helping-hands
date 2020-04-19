@@ -5,7 +5,6 @@ import Landing from "../../Landing";
 import Login, { LogOut } from "../../Login";
 import Profile from "../../Profile";
 import BuddyList from "../../BuddyList";
-import ProtectedRoute from "../../App/Authentication/ProtectedRoute";
 import Register from "../../Register";
 import Request from "../../Request";
 

@@ -16,7 +16,7 @@ const BuddyList = () => {
     {
       id: 2,
       avatar_image:
-      "https://images.pexels.com/photos/788567/pexels-photo-788567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "https://images.pexels.com/photos/788567/pexels-photo-788567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
       first_name: "Sherin",
       last_name: "Goodwill",
       status: "pending",
@@ -64,7 +64,7 @@ const BuddyList = () => {
           " this buddy request or buddy"
         );
         setBuddies(
-          buddies.filter(item => item.id !== id)
+          buddies.filter((item) => item.id !== id)
           // buddies.map((item, idx) => {
           //   if (item.id === id) {
           //     return { ...item, status: "pending" };

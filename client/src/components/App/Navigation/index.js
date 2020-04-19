@@ -60,20 +60,20 @@ const Navigation = () => {
                   </p>
                   <p className="control">
                     <Link
-                      className="button is-primary is-outlined"
-                      to="/profile"
-                      onClick={() => setIsActive(false)}
-                    >
-                      My Profile
-                    </Link>
-                  </p>
-                  <p className="control">
-                    <Link
                       onClick={() => setIsActive(false)}
                       className="button is-primary is-outlined"
                       to="/buddies"
                     >
                       My Buddies
+                    </Link>
+                  </p>
+                  <p className="control">
+                    <Link
+                      className="button is-primary is-outlined"
+                      to="/profile"
+                      onClick={() => setIsActive(false)}
+                    >
+                      My Profile
                     </Link>
                   </p>
                   <p className="control">

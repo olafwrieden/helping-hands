@@ -69,19 +69,19 @@ We built a TypeScript Express API (connecting to a PostgreSQL database) and Reac
    DB_DATABASE = [YOUR_POSTGRES_DATABASE];
    ```
 
-2. Install the API's dependencies by runnning:
+2. Install the API's dependencies by running:
 
    ```
    $ npm install
    ```
 
-3. Install the React.js dependencies, first navigate to the `/client` directory:
+3. To install the React.js dependencies, first navigate to the `/client` directory:
 
    ```
    $ cd client
    ```
 
-   then install the dependencies:
+   then install its dependencies:
 
    ```
    $ npm install
@@ -93,15 +93,15 @@ We built a TypeScript Express API (connecting to a PostgreSQL database) and Reac
    $ cd ..
    ```
 
-4. To start both the Express API and React App in development mode, the following in the root directory:
+4. To start both the Express API and React App in development mode, run the following in the root directory:
 
    ```
    $ npm run dev
    ```
 
-   **Note:** To start the server or client independently: `$ npm run dev:server` or `$ npm run dev:app` respoectively. However, the front end is dependent on the API and will not fully function without it.
+   **Note:** To start the server or client independently: `$ npm run dev:server` or `$ npm run dev:app` respectively. However, the front end is dependent on the API and will not fully function without it.
 
-5. React should automatically open the default web browser to the live render of the site. You should now be presented with the landing page for Helping Hands.
+5. React should automatically open the default web browser to the live render of the site. You will now be presented with the landing page for Helping Hands.
 
 ![Landing Page](/screenshots/hero.png "Landing Page")
 

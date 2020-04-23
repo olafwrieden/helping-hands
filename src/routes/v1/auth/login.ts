@@ -21,7 +21,13 @@ const loginInputRules = () => {
 
 router.post("/", loginInputRules(), validate, async (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
-    if (info) return res.status(401).send(info);
+    console.log('info ', info.error)
+    console.log('user ', user)
+    console.log('error ', err)
+    if (info) {
+      res.statusMessage = `${info.error}`
+      return res.status(403).end()
+    };
     if (err) return res.status(500).send({ error: err });
     if (!user) {
       return res.send({

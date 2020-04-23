@@ -14,7 +14,7 @@ router.delete("/:id", async (req, res, next) => {
 			.where("id = :id", { id: req.params.id })
 			.execute();
 			req.logOut();
-			console.log('response from db in delete ', deleteUser)
+			console.log('response from db in delete ', deleteUser);
 			res.send({ message: 'Your profile was deleted.' });
 		} catch(err) {
 			res.status(500).send({message: 'There was an issue deleting your profile.'})

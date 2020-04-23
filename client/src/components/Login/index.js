@@ -96,14 +96,12 @@ const auth = useAuth();
     },
   })
     .then((response) => {
-      console.log(response)
       if (response.ok) {
         auth.setUser(null)
         return history.push("/");
       }
     })
     .catch((err) => {
-      console.log('error in logging out, ', err.message)
       return history.push("/");
     });
 

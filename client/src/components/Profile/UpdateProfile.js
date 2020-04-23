@@ -16,8 +16,25 @@ const UpdateProfile = ({ showingEditFunc }) => {
   const handleSubmit = (e) => {
     //fetch api and make post request
     if (!isAuthed) return;
+    
     e.preventDefault();
-    console.log(state)
+    fetch("/api/v1/update", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.user) {
+          // Set User Context (login)
+          setUser(res.user);
+          return history.push("/profile");
+        }
+      })
+      .catch((err) => console.log("Error:", err.message));
   };
 
   return (
@@ -26,19 +43,6 @@ const UpdateProfile = ({ showingEditFunc }) => {
         onClick={() => showingEditFunc()}
         className="delete is-medium close-edit-form"
       ></button>
-      <div className="field">
-        <label className="label">Email</label>
-        <div className="control has-icons-left">
-          <input
-            onChange={handleChange}
-            className="input"
-            name="email"
-            type="text"
-            value={state.email}
-            required
-          />
-        </div>
-      </div>
       <div className="field">
         <label className="label">Bio</label>
         <div className="control">

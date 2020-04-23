@@ -6,6 +6,7 @@ import login from './auth/login';
 import logout from './auth/logout';
 import users from './users/user';
 import profile from './users/profile';
+import updateUser from './users/updateUser';
 import buddy from './buddy';
 
 let router = express.Router();
@@ -22,6 +23,7 @@ router.use('/register', register)
 router.use('/requests', request)
 router.use('/login', login)
 router.use('/logout', logout)
+router.use('/update', updateUser)
 
 router.use('/buddy', buddy);
 

@@ -5,11 +5,11 @@ import UpdateProfile from "./UpdateProfile";
 
 const Profile = () => {
   const { isAuthed, user } = useAuth();
-  const { firstName, lastName, email, bio, phone, address, city, zipCode, isVolunteer, ratings} = user
+  const { firstName, lastName, email, bio, phone, address, city, zipCode, isVolunteer} = user
   const [showingEdit, setShowingEdit] = useState(false);
   const showingEditFunc = () => setShowingEdit(!showingEdit);
   //pull in ratings for this user from ratings table
-  const arrayOfRatings = ratings;
+  const arrayOfRatings = [4, 5, 3, 4, 5, 5];
   //reduce and get average rating
   const avgRating = Math.round(
     arrayOfRatings.reduce((acc, c) => acc + c, 0) / arrayOfRatings.length

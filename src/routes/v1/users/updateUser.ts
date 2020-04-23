@@ -43,6 +43,9 @@ router.post("/", updateUserInputRules(), validate, async (req, res) => {
    //save newly updated user object
    const updatedUser = await User.save(user)
 
+   //error checking: compoare key-value pairs of updated user in db wiht request from client.
+   //if discrepancy found, return error.
+
   res.send({ message: "The user was successfully updated.", updatedUser });
 });
 

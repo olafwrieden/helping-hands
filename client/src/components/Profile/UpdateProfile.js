@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { useAuth } from "../App/Authentication";
 import "./Profile.css";
 
-const UpdateProfile = ({ showingEditFunc }) => {
-  const { isAuthed, user } = useAuth();
-  const { email, bio, phone, address, city, zipCode} = user
+const UpdateProfile = ({ showingEditFunc, history }) => {
+  const { isAuthed, user, setUser } = useAuth();
   const [state, setState] = useState({
     ...user
   });
@@ -16,8 +15,9 @@ const UpdateProfile = ({ showingEditFunc }) => {
   const handleSubmit = (e) => {
     //fetch api and make post request
     if (!isAuthed) return;
-    
-    e.preventDefault();
+    const data = {...state}
+    console.log(data)
+    // e.preventDefault();
     fetch("/api/v1/update", {
       method: "POST",
       headers: {

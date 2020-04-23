@@ -5,10 +5,11 @@ import UpdateProfile from "./UpdateProfile";
 
 const Profile = () => {
   const { isAuthed, user } = useAuth();
+  const { firstName, lastName, email, bio, phone, address, city, zipCode, isVolunteer, ratings} = user
   const [showingEdit, setShowingEdit] = useState(false);
   const showingEditFunc = () => setShowingEdit(!showingEdit);
   //pull in ratings for this user from ratings table
-  const arrayOfRatings = new Array(5).fill(3);
+  const arrayOfRatings = ratings;
   //reduce and get average rating
   const avgRating = Math.round(
     arrayOfRatings.reduce((acc, c) => acc + c, 0) / arrayOfRatings.length
@@ -44,9 +45,11 @@ const Profile = () => {
               </button>
             )}
             <h2 className="subtitle is-3 profile-firstname">
-              {user.firstName} {user.lastName}
+              {firstName} {lastName}
             </h2>
-            {isAuthed && <h2 className="subtitle is-4">{user.email}</h2>}
+            <h2 className="subtitle is-4">
+              {isVolunteer ? 'Volunteer' : 'In Need'}
+            </h2>
             <div className="ratings-wrapper">
               <span>
                 <strong>Average Rating: </strong>
@@ -60,15 +63,29 @@ const Profile = () => {
               <span>(From {arrayOfRatings.length} Ratings)</span>
             </div>
             <div className="card-content">
-              <div className="content">{user.bio}</div>
+              <p>{bio}</p>
+            </div>
+            <div className="contact-wrapper">
+            <h2 className="subtitle is-4">
+              Contact:
+            </h2>
+            {isAuthed ? 
+            <ul>
+              <li><a href={`mailto:${email}`}>{email}</a></li>
+              <li><a href={`tel:${phone}`}>{phone}</a></li>
+              <li><span>{address}</span></li>
+              <li><span>{zipCode} {city}</span></li>
+            </ul>
+            : 
+            <ul>
+              <li><a href={`mailto:${email}`}>{email}</a></li>
+              <li><span>{city}</span></li>
+            </ul>
+            }
             </div>
           </div>
         </div>
-        {!isAuthed && (
-          <div className="column login-form">
-            <div className="container"></div>
-          </div>
-        )}
+        
         {/* provide margin spacing */}
         <div className="column level"></div>
       </div>

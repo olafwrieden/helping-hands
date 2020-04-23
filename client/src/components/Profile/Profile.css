@@ -56,6 +56,18 @@
   padding: 0 15px;
 }
 
+.contact-wrapper {
+  padding: 5% 5% 5% 10%;
+}
+
+/* .contact-wrapper > ul {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-left: 30%;
+} */
+
 .edit-profile-form {
   position: absolute;
   z-index: 3;

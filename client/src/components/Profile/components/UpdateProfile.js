@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useAuth } from "../App/Authentication";
-import "./Profile.css";
+import { useAuth } from "../../App/Authentication";
+import "../Profile.css";
 
 const UpdateProfile = ({ showingEditFunc, history }) => {
   const { isAuthed, user, setUser } = useAuth();

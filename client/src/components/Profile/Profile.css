@@ -25,11 +25,19 @@
   display: block !important;
 }
 
-.edit-btn {
+.profile-page-btns {
   position: absolute;
   top: 9%;
   right: 5%;
   z-index: 2;
+  width: 12%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly; 
+}
+
+.profile-page-btns > button {
+  width: 45px;
 }
 
 .profile-firstname {
@@ -69,9 +77,9 @@
   top: 50%;
   left: 50%;
   width: 280px;
-  /* height: 350px; */
   margin-top: -175px; /* Half the height */
   margin-left: -140px; /* Half the width */
+  animation: fromTop 0.4s cubic-bezier(0.1, 1.13, 0.83, 1.01) 0s 1 normal;
 }
 
 .close-edit-form {
@@ -80,8 +88,23 @@
   right: 5%;
 }
 
-.edit-profile-form > input[type="submit"] {
-  
+.delete-profile-alert {
+  position: absolute;
+  z-index: 3;
+  top: 10vh;
+  padding: 30px;
+  border-radius: 10px;
+  top: 50%;
+  left: 45%;
+  width: 40%;
+  margin-top: -175px; /* Half the height */
+  margin-left: -140px; /* Half the width */
+  animation: fromTop 0.4s cubic-bezier(0.1, 1.13, 0.83, 1.01) 0s 1 normal;
+}
+
+@keyframes fromTop {
+  0%   {  transform: translateY(-50rem); }
+  100% { transform: translateY(0); }
 }
 
 @media screen and (min-width: 600px) {

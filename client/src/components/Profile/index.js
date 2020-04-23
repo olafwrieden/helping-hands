@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import "./Profile.css";
 import { useAuth } from "../App/Authentication";
-import UpdateProfile from "./UpdateProfile";
+import UpdateProfile from "./components/UpdateProfile";
+import DeleteProfile from "./components/DeleteProfile";
+
 
 const Profile = () => {
   const { isAuthed, user } = useAuth();
   const { firstName, lastName, email, bio, phone, address, city, zipCode, isVolunteer} = user
   const [showingEdit, setShowingEdit] = useState(false);
-  const showingEditFunc = () => setShowingEdit(!showingEdit);
+  const [showingDelete, setShowingDelete] = useState(false);
+  const showingEditFunc = () => {
+    showingDelete && setShowingDelete(!showingDelete)
+    setShowingEdit(!showingEdit)
+  };
+  const showingDeleteFunc = () => {
+    showingEdit && setShowingEdit(!showingEdit)
+    setShowingDelete(!showingDelete)
+  };
   //pull in ratings for this user from ratings table
   const arrayOfRatings = [4, 5, 3, 4, 5, 5];
   //reduce and get average rating
@@ -37,12 +47,20 @@ const Profile = () => {
           />
           <div className="card">
             {isAuthed && (
-              <button
-                onClick={() => showingEditFunc()}
-                className="button is-success edit-btn"
-              >
-                <i className="fa fa-edit"></i>
-              </button>
+              <div className="profile-page-btns">
+                <button
+                  onClick={showingEditFunc}
+                  className="button is-success"
+                >
+                  <i className="fa fa-edit"></i>
+                </button>
+                <button
+                  onClick={showingDeleteFunc}
+                  className="button is-danger"
+                >
+                  <i className="fa fa-times"></i>
+                </button>
+              </div>
             )}
             <h2 className="subtitle is-3 profile-firstname">
               {firstName} {lastName}
@@ -91,6 +109,7 @@ const Profile = () => {
       </div>
       {/* show update profile form */}
       {showingEdit && <UpdateProfile showingEditFunc={showingEditFunc} />}
+      {showingDelete && <DeleteProfile showingDeleteFunc={showingDeleteFunc} />}
     </>
   );
 };

@@ -112,7 +112,6 @@ const auth = useAuth();
           <div className="column is-1 level flat"></div>
           <div className="column is-5 level">
             <h1 className="title is-1 login-hero-title">Logging Out</h1>
-            <h2 className="subtitle is-3">This feature is not available.</h2>
           </div>
         </div>
       </div>

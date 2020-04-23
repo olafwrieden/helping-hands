@@ -21,6 +21,7 @@ const updateUserInputRules = () => {
 };
 
 router.post("/", updateUserInputRules(), validate, async (req, res) => {
+  if(req.isAuthenticated) {
     try {
     // const connection = getConnection('default')
     // const User = connection.getRepository<Users>("Users");
@@ -50,6 +51,9 @@ router.post("/", updateUserInputRules(), validate, async (req, res) => {
         console.log(err)
         res.status(500).send({ error: "Attempt to update user was unsuccessful." })
     }
+  } else {
+    res.status(401).send({ error: "Not Authorized" });
+  }
 });
 
 export default router;

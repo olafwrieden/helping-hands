@@ -13,28 +13,28 @@ export const useAuth = () => {
 
 function useProvideAuth() {
   const [user, setUser] = useState(null);
-  // const isAuthed = user?.id ? true : false;
-  const isAuthed = true
+  const isAuthed = user?.id ? true : false;
+  // const isAuthed = true
   useEffect(() => {
     //mock user in context
-  setUser({
-    firstName: 'Tom',
-    lastName: 'Hardy',
-    email: 'example@mail.com',
-    bio: 'I am a passionate volunteer keen to enhance the connectivity in my local community and provide volunteer help to those in need.',
-    phone: '0212223333',
-    address: '3 Pleasant Crescent',
-    city: 'Auckland',
-    zipCode: 1441,
-    isVolunteer: true,
-    ratings: [4, 5, 4, 4, 5, 5]
-  })}, []);
-  //   fetch("/api/v1/profile", {
-  //     headers: { "Content-type": "application/json" },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => (res?.id ? setUser(res) : setUser(null)));
-  // }, []);
+  // setUser({
+  //   firstName: 'Tom',
+  //   lastName: 'Hardy',
+  //   email: 'example@mail.com',
+  //   bio: 'I am a passionate volunteer keen to enhance the connectivity in my local community and provide volunteer help to those in need.',
+  //   phone: '0212223333',
+  //   address: '3 Pleasant Crescent',
+  //   city: 'Auckland',
+  //   zipCode: 1441,
+  //   isVolunteer: true,
+  //   ratings: [4, 5, 4, 4, 5, 5]
+  // })}, []);
+    fetch("/api/v1/profile", {
+      headers: { "Content-type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((res) => (res?.id ? setUser(res) : setUser(null)));
+  }, []);
 
   const signin = (email, password) => {
     return fetch("/api/v1/login", {

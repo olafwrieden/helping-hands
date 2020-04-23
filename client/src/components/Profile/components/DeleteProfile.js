@@ -1,11 +1,22 @@
 import React from 'react'
 import "../Profile.css";
-import { useAuth } from "../App/Authentication";
+import { useAuth } from "../../App/Authentication";
 
 const DeleteProfile = ({showingDeleteFunc}) => {
-    const { user } = useAuth();
+    const { user, setUser, isAuthed } = useAuth();
     const deleteProfile = () => {
         if(!isAuthed) return
+        fetch(`/api/v1/deleteUser/${user.id}`, 
+        {
+            method: "DELETE",
+        })
+        .then(res => {
+            if(res.ok)
+            {
+                setUser(null)
+            }
+        })
+        .catch(err => console.log("Error", err.message))
         //use user from context or session cookie to find user in db,
         //then delete that profile and also delete the session cookie.
     }

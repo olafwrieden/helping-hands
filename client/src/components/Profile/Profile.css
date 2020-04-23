@@ -95,8 +95,8 @@
   padding: 30px;
   border-radius: 10px;
   top: 50%;
-  left: 45%;
-  width: 40%;
+  left: 50%;
+  width: 280px;
   margin-top: -175px; /* Half the height */
   margin-left: -140px; /* Half the width */
   animation: fromTop 0.4s cubic-bezier(0.1, 1.13, 0.83, 1.01) 0s 1 normal;

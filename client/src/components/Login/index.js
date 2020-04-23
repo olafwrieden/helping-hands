@@ -87,6 +87,7 @@ const Login = ({ history }) => {
 };
 
 export const LogOut = ({ history }) => {
+const auth = useAuth();
   fetch("/api/v1/logout", {
     method: "GET",
     headers: {
@@ -95,11 +96,14 @@ export const LogOut = ({ history }) => {
     },
   })
     .then((response) => {
+      console.log(response)
       if (response.ok) {
+        auth.setUser(null)
         return history.push("/");
       }
     })
     .catch((err) => {
+      console.log('error in logging out, ', err.message)
       return history.push("/");
     });
 

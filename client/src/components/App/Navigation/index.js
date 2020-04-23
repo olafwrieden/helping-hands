@@ -50,7 +50,6 @@ const Navigation = () => {
                 <>
                   <p className="control">
                     <Link
-                      onClick={() => setIsActive(!isActive)}
                       className="button is-primary is-outlined"
                       to="/request"
                       onClick={() => setIsActive(false)}

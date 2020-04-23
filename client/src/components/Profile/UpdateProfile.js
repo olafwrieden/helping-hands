@@ -16,7 +16,6 @@ const UpdateProfile = ({ showingEditFunc, history }) => {
     //fetch api and make post request
     e.preventDefault();
     if (!isAuthed) return;
-    console.log('state to be sent to server, ', state)
     fetch("/api/v1/update", {
       method: "POST",
       headers: {
@@ -27,9 +26,9 @@ const UpdateProfile = ({ showingEditFunc, history }) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.updatedUser) {
+        if (res.dbres.affected === 1) {
           // Set User Context (login)
-          setUser(res.updatedUser);
+          setUser(state);
           return showingEditFunc();
         }
       })

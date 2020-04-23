@@ -21,28 +21,35 @@ const updateUserInputRules = () => {
 };
 
 router.post("/", updateUserInputRules(), validate, async (req, res) => {
-  const connection = getConnection('default')
-  const User = connection.getRepository<Users>("Users");
-  const { id } = req.body;
-  console.log('req from client, ', req.body)
-  // Find the user in the db by email. The object returned will include all fields from db.
-//   const user = await User.findOne(id)
-//   console.log('original user from db, ', user)
-//   //update props of user object from db with those from client
-//   for (let prop in user) {
-//     for(let p in req.body) {
-//         //if property in client user matches db user, update that property
-//         user[prop] = req.body[p]
-//     }
-//    }
-//    console.log('updated user for db, ', user)
-   //save newly updated user object
-   const updatedUser = await User.save(req.body)
-   console.log('updated user from db, ', updatedUser)
-   //error checking: compoare key-value pairs of updated user in db wiht request from client.
-   //if discrepancy found, return error.
-
-  res.send({ message: "The user was successfully updated.", updatedUser });
+    try {
+    // const connection = getConnection('default')
+    // const User = connection.getRepository<Users>("Users");
+    // const { id } = req.body;
+    // console.log('req from client, ', req.body)
+    // const updatedUser = await User.save(req.body)
+    // console.log('updated user from db, ', updatedUser)
+    //error checking: compoare key-value pairs of updated user in db wiht request from client.
+    //if discrepancy found, return error.
+    const { id } = req.body
+    const {
+        bio,
+        phone,
+        address,
+        city,
+        zipCode
+    } = req.body
+    const dbres = await getConnection('default')
+    .createQueryBuilder()
+    .update(Users)
+    .set({bio, phone, address, city, zipCode})
+    .where("id = :id", { id })
+    .execute();
+    console.log('dbres, ', dbres)
+    res.status(200).send({ message: "The user was successfully updated.", dbres });
+    } catch(err) {
+        console.log(err)
+        res.status(500).send({ error: "Attempt to update user was unsuccessful." })
+    }
 });
 
 export default router;

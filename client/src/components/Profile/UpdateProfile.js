@@ -14,24 +14,23 @@ const UpdateProfile = ({ showingEditFunc, history }) => {
 
   const handleSubmit = (e) => {
     //fetch api and make post request
+    e.preventDefault();
     if (!isAuthed) return;
-    const data = {...state}
-    console.log(data)
-    // e.preventDefault();
+    console.log('state to be sent to server, ', state)
     fetch("/api/v1/update", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(state),
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.user) {
+        if (res.updatedUser) {
           // Set User Context (login)
-          setUser(res.user);
-          return history.push("/profile");
+          setUser(res.updatedUser);
+          return showingEditFunc();
         }
       })
       .catch((err) => console.log("Error:", err.message));
@@ -51,7 +50,7 @@ const UpdateProfile = ({ showingEditFunc, history }) => {
       </div>
       <div className="field">
         <label className="label">Phone</label>
-        <div className="control has-icons-left">
+        <div className="control">
           <input
             onChange={handleChange}
             className="input"
@@ -64,7 +63,7 @@ const UpdateProfile = ({ showingEditFunc, history }) => {
       </div>
       <div className="field">
         <label className="label">Address</label>
-        <div className="control has-icons-left">
+        <div className="control">
           <input
             onChange={handleChange}
             className="input"
@@ -77,7 +76,7 @@ const UpdateProfile = ({ showingEditFunc, history }) => {
       </div>
       <div className="field">
         <label className="label">City</label>
-        <div className="control has-icons-left">
+        <div className="control">
           <input
             onChange={handleChange}
             className="input"

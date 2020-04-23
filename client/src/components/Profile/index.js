@@ -48,7 +48,7 @@ const Profile = () => {
               {firstName} {lastName}
             </h2>
             <h2 className="subtitle is-4">
-              {isVolunteer ? 'Volunteer' : 'In Need'}
+              {isVolunteer ? 'Volunteer' : 'I need a Hand'}
             </h2>
             <div className="ratings-wrapper">
               <span>

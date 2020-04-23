@@ -4,11 +4,9 @@ import "./Profile.css";
 
 const UpdateProfile = ({ showingEditFunc }) => {
   const { isAuthed, user } = useAuth();
-  const { firstName, lastName, email } = user;
+  const { email, bio, phone, address, city, zipCode} = user
   const [state, setState] = useState({
-    firstName,
-    lastName,
-    email,
+    ...user
   });
 
   const handleChange = (e) => {
@@ -19,7 +17,7 @@ const UpdateProfile = ({ showingEditFunc }) => {
     //fetch api and make post request
     if (!isAuthed) return;
     e.preventDefault();
-    console.log("Make post request to API");
+    console.log(state)
   };
 
   return (
@@ -28,38 +26,6 @@ const UpdateProfile = ({ showingEditFunc }) => {
         onClick={() => showingEditFunc()}
         className="delete is-medium close-edit-form"
       ></button>
-      <div className="field">
-        <label className="label">First Name</label>
-        <div className="control has-icons-left">
-          <input
-            onChange={handleChange}
-            className="input"
-            name="firstName"
-            type="text"
-            value={state.firstName}
-            required
-          />
-          <span className="icon is-small is-left">
-            <i className="fas fa-user"></i>
-          </span>
-        </div>
-      </div>
-      <div className="field">
-        <label className="label">Last Name</label>
-        <div className="control has-icons-left">
-          <input
-            onChange={handleChange}
-            className="input"
-            name="lastName"
-            type="text"
-            value={state.lastName}
-            required
-          />
-          <span className="icon is-small is-left">
-            <i className="fas fa-user"></i>
-          </span>
-        </div>
-      </div>
       <div className="field">
         <label className="label">Email</label>
         <div className="control has-icons-left">
@@ -71,13 +37,69 @@ const UpdateProfile = ({ showingEditFunc }) => {
             value={state.email}
             required
           />
-          <span className="icon is-small is-left">
-            <i className="fas fa-envelope"></i>
-          </span>
+        </div>
+      </div>
+      <div className="field">
+        <label className="label">Bio</label>
+        <div className="control">
+          <textarea onChange={handleChange} name="bio" className="textarea" value={state.bio}></textarea>
+        </div>
+      </div>
+      <div className="field">
+        <label className="label">Phone</label>
+        <div className="control has-icons-left">
+          <input
+            onChange={handleChange}
+            className="input"
+            name="phone"
+            type="text"
+            value={state.phone}
+            required
+          />
+        </div>
+      </div>
+      <div className="field">
+        <label className="label">Address</label>
+        <div className="control has-icons-left">
+          <input
+            onChange={handleChange}
+            className="input"
+            name="address"
+            type="text"
+            value={state.address}
+            required
+          />
+        </div>
+      </div>
+      <div className="field">
+        <label className="label">City</label>
+        <div className="control has-icons-left">
+          <input
+            onChange={handleChange}
+            className="input"
+            name="city"
+            type="text"
+            value={state.city}
+            required
+          />
+        </div>
+      </div>
+      <div className="field">
+        <label className="label">Zip Code</label>
+        <div className="control">
+          <input
+            onChange={handleChange}
+            className="input"
+            type="text"
+            value={state.zipCode}
+            name="zipCode"
+            minLength="4"
+            maxLength="4"
+          />
         </div>
       </div>
       <input
-        className="button is-primary is-success"
+        className="button is-primary is-success is-pulled-right"
         type="submit"
         value="Submit"
       />

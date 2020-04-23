@@ -64,13 +64,12 @@
   position: absolute;
   z-index: 3;
   top: 10vh;
-  position: absolute;
   padding: 30px;
   border-radius: 10px;
   top: 50%;
   left: 50%;
   width: 280px;
-  height: 350px;
+  /* height: 350px; */
   margin-top: -175px; /* Half the height */
   margin-left: -140px; /* Half the width */
 }
@@ -81,11 +80,15 @@
   right: 5%;
 }
 
+.edit-profile-form > input[type="submit"] {
+  
+}
+
 @media screen and (min-width: 600px) {
   .edit-profile-form {
     padding-top: 50px;
     width: 350px;
-    height: 450px;
+    /* height: 450px; */
     margin-top: -225px; /* Half the height */
     margin-left: -175px; /* Half the width */
   }

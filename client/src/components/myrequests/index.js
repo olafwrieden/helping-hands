@@ -1,14 +1,10 @@
 import React from 'react'
+import './MyRequests.css'
 
 const myRequests = () => {
     return (
-        <div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            test
+        <div className="container requests-container">
+            <h2>My Requests</h2>
         </div>
     )
 }

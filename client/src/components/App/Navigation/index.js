@@ -33,7 +33,7 @@ const Navigation = () => {
         id="navbarExampleTransparentExample"
         className={`navbar-menu ${isActive ? "is-active" : ""}`}
       >
-        <div className="navbar-start">
+        {/* <div className="navbar-start">
           <Link
             className="navbar-item"
             to="/"
@@ -41,11 +41,11 @@ const Navigation = () => {
           >
             Home
           </Link>
-        </div>
+        </div> */}
 
         <div className="navbar-end">
           <div className="navbar-item">
-            <div className="field is-grouped">
+            <div className="field is-grouped nav-wrapper">
               {isAuthed ? (
                 <>
                   <p className="control">
@@ -55,6 +55,15 @@ const Navigation = () => {
                       onClick={() => setIsActive(false)}
                     >
                       New Request
+                    </Link>
+                  </p>
+                  <p className="control">
+                    <Link
+                      className="button is-primary is-outlined"
+                      to="/myrequests"
+                      onClick={() => setIsActive(false)}
+                    >
+                      My Requests
                     </Link>
                   </p>
                   <p className="control">

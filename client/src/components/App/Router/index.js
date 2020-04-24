@@ -19,7 +19,7 @@ const Router = () => (
       <ProtectedRoute path="/request" component={Request} />
       <ProtectedRoute path="/profile" component={Profile} />
       <ProtectedRoute path="/buddies" component={BuddyList} />
-      <ProtectedRoute path="/buddies" component={MyRequests} />
+      <ProtectedRoute path="/myrequests" component={MyRequests} />
       <Route component={NotFound} />
     </Switch>
   </main>

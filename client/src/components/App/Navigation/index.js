@@ -33,15 +33,6 @@ const Navigation = () => {
         id="navbarExampleTransparentExample"
         className={`navbar-menu ${isActive ? "is-active" : ""}`}
       >
-        {/* <div className="navbar-start">
-          <Link
-            className="navbar-item"
-            to="/"
-            onClick={() => setIsActive(false)}
-          >
-            Home
-          </Link>
-        </div> */}
 
         <div className="navbar-end">
           <div className="navbar-item">

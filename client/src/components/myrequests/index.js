@@ -59,11 +59,9 @@ const MyRequests = () => {
         if(!isAuthed) return
         fetch(`api/v1/requests/${id}`)
             .then(res => res.json())
-            .then(res => {
-                setRequestsFromDB(res)
-            })
+            .then(res => setRequestsFromDB(res))
             .catch(err => console.log(err))
-    })
+    }, [])
 
     //clicking cancel changes request status to cancelled
     const cancelReq = index => {
@@ -89,11 +87,11 @@ const MyRequests = () => {
                     <span className="column is-one-quarter has-text-weight-bold">Accepted By</span>
                 </div>
                 {requestsFromDB.map((item, idx) => 
-                <div key={`${idx}${item}`} className={`${item.status === "Accepted" 
+                <div key={`${idx}${item}`} className={`${item.status === "accepted" 
                                     ? "has-background-success"
-                                    : item.status === "Pending"
+                                    : item.status === "pending"
                                     ? "has-background-warning"
-                                    : item.status === "Completed"
+                                    : item.status === "complete"
                                     ? "has-background-primary"
                                     : "has-background-grey-lighter"}`}>
                 <button onClick={() => showDivFunc(idx)} key={`${item}${idx}`} className={"button columns is-mobile req-list-item is-marginless is-paddingless"} style={{background: "rgba(255, 255, 255, 0.3)"}}>
@@ -110,7 +108,7 @@ const MyRequests = () => {
                     <div className="level columns is-mobile">
                     <span className="column is-3 has-text-weight-bold has-text-centered">Address: </span>
                     <p className="column is-6 has-text-left">{item.address}, {item.city}</p>
-                    {item.status !== "Completed" 
+                    {item.status !== "complete"  
                     ? <button onClick={() => cancelReq(idx)} className="column is-2 button is-danger cancel-req-btn">Cancel Request</button>
                     : <div className="column is-2"> </div>}
                     <div className="column is-2"> </div>

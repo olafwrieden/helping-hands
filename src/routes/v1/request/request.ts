@@ -28,7 +28,7 @@ router.get("/:id", async (req, res) => {
       .createQueryBuilder("request")
       .select("request")
       .where("request.requestedUser = :id", { id })
-      .getOne()
+      .getMany()
     return res.send(requests);
   } else {
     res.status(401).send({ message: "Not Authorized" });

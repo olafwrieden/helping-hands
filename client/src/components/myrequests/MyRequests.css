@@ -16,3 +16,8 @@
     display: block;
     padding: 2% 0;
 }
+
+.cancel-req-btn {
+    padding: 0 !important;
+    white-space: initial;
+}

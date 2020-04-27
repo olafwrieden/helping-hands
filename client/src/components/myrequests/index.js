@@ -78,8 +78,10 @@ const MyRequests = () => {
                     <p className="column is-three-quarters has-text-left">{item.details}</p>
                     </div>
                     <div className="level columns is-mobile">
-                    <span className="column is-one-quarter has-text-weight-bold has-text-centered">Address: </span>
-                    <p className="column is-three-quarters has-text-left">{item.address}</p>
+                    <span className="column is-3 has-text-weight-bold has-text-centered">Address: </span>
+                    <p className="column is-5 has-text-left">{item.address}, {item.city}</p>
+                    <button onClick={() => alert("request for " + item.type + " was cancelled.")} class="column is-2 button is-danger cancel-req-btn">Cancel Request</button>
+                    <div className="column is-3"> </div>
                     </div>
                 </div>
                 </div>

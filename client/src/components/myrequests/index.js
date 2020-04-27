@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './MyRequests.css'
+import { useAuth } from "../App/Authentication";
 
 const MyRequests = () => {
     const [clickedIndex, setClickedIndex] = useState(null)
+    const [requestsFromDB, setRequestsFromDB] = useState([])
+    const { isAuthed, user } = useAuth()
+
     const requestsData = [
         {
             type: "Assistance",
@@ -34,7 +38,7 @@ const MyRequests = () => {
         {
             type: "Third Party Assistance",
             requestedAt: "11:30",
-            status: "Accepted",
+            status: "Completed",
             acceptedBy: "Jemma Schofield",
             details: "I am requesting assistance on behalf of my sick Aunt, please pick up some panadol for her.",
             address: "10 Dawning Street",
@@ -42,16 +46,18 @@ const MyRequests = () => {
         }
     ]
 
+    //show/hide more details popout
     const showDivFunc = index => {
         return clickedIndex === index 
         ? setClickedIndex(null)
         : setClickedIndex(index)
     }
+    //on render, get the requests from the db
 
     return (
-        <div className="requests-container card">
+        <div className="requests-container">
             <h2 className="title is-3">My Requests</h2>
-            <div className="card">
+            <div className="card req-subcontainer">
                 <div className="level columns is-mobile req-title-row is-marginless is-paddingless">
                     <span className="column is-one-quarter has-text-weight-bold">Type</span>
                     <span className="column is-one-quarter has-text-weight-bold">Requested At</span>
@@ -59,12 +65,12 @@ const MyRequests = () => {
                     <span className="column is-one-quarter has-text-weight-bold">Accepted By</span>
                 </div>
                 {requestsData.map((item, idx) => 
-                <div className={`${item.type === "Assistance" 
-                                    ? "has-background-primary"
-                                    : item.type === "Third Party Assistance"
-                                    ? "has-background-info"
-                                    : item.type === "Pickup"
+                <div key={`${idx}${item}`} className={`${item.status === "Accepted" 
+                                    ? "has-background-success"
+                                    : item.status === "Pending"
                                     ? "has-background-warning"
+                                    : item.status === "Completed"
+                                    ? "has-background-primary"
                                     : "has-background-success"}`}>
                 <button onClick={() => showDivFunc(idx)} key={`${item}${idx}`} className={"button columns is-mobile req-list-item is-marginless is-paddingless"} style={{background: "rgba(255, 255, 255, 0.3)"}}>
                     <span className="column is-one-quarter">{item.type}</span>
@@ -79,9 +85,11 @@ const MyRequests = () => {
                     </div>
                     <div className="level columns is-mobile">
                     <span className="column is-3 has-text-weight-bold has-text-centered">Address: </span>
-                    <p className="column is-5 has-text-left">{item.address}, {item.city}</p>
-                    <button onClick={() => alert("request for " + item.type + " was cancelled.")} class="column is-2 button is-danger cancel-req-btn">Cancel Request</button>
-                    <div className="column is-3"> </div>
+                    <p className="column is-6 has-text-left">{item.address}, {item.city}</p>
+                    {item.status !== "Completed" 
+                    ? <button onClick={() => alert("request for " + item.type + " was cancelled.")} class="column is-2 button is-danger cancel-req-btn">Cancel Request</button>
+                    : <div className="column is-2"> </div>}
+                    <div className="column is-2"> </div>
                     </div>
                 </div>
                 </div>

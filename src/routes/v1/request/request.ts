@@ -20,6 +20,21 @@ router.get("/", async (req, res) => {
   }
 });
 
+//get requests for currently logged in user
+router.get("/:id", async (req, res) => {
+  const { id } = req.params
+  if (!req.isAuthenticated()) {
+    const requests = await getRequestRepo()
+      .createQueryBuilder("request")
+      .select()
+      .where("request.requestedUser = :id", { id })
+    return res.send(requests);
+  } else {
+    res.status(401).send({ message: "Not Authorized" });
+  }
+});
+
+
 // PUT: Create New Request
 const requestSubmissionRules = () => {
   return [

@@ -16,7 +16,7 @@ function useProvideAuth() {
   // const isAuthed = user?.id ? true : false;
   const isAuthed = true
   useEffect(() => {
-    //mock user in context
+    // mock user in context
   setUser({
     firstName: 'Tom',
     lastName: 'Hardy',

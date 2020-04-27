@@ -20,19 +20,64 @@ router.get("/", async (req, res) => {
   }
 });
 
-//get requests for currently logged in user
+// get requests for currently logged in user
 router.get("/:id", async (req, res) => {
   const { id } = req.params
-  if (!req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     const requests = await getRequestRepo()
       .createQueryBuilder("request")
-      .select()
+      .select("request")
       .where("request.requestedUser = :id", { id })
+      .getMany()
     return res.send(requests);
   } else {
     res.status(401).send({ message: "Not Authorized" });
   }
 });
+
+// mock response
+
+// router.get("/:id", async (req, res) => {
+//   return (res.send([
+//     {
+//         type: "Assistance",
+//         requestedAt: "08:00",
+//         status: "Accepted",
+//         acceptedBy: "Tom Hardy",
+//         details: "I need assistance mowing my lawn please.",
+//         address: "3 Example Street",
+//         city: "Auckland"
+//     },
+//     {
+//         type: "Pickup",
+//         requestedAt: "10:00",
+//         status: "Pending",
+//         acceptedBy: "N/A",
+//         details: "I need 3 carrots, 4 onions and a pumpkin from the grocery store.",
+//         address: "5 Test Drive",
+//         city: "Auckland"
+//     },
+//     {
+//         type: "Assistance",
+//         requestedAt: "09:00",
+//         status: "Pending",
+//         acceptedBy: "N/A",
+//         details: "I need my gutters cleaned out.",
+//         address: "21 Jump Street",
+//         city: "Auckland"
+//     },
+//     {
+//         type: "Third Party Assistance",
+//         requestedAt: "11:30",
+//         status: "Completed",
+//         acceptedBy: "Jemma Schofield",
+//         details: "I am requesting assistance on behalf of my sick Aunt, please pick up some panadol for her.",
+//         address: "10 Dawning Street",
+//         city: "Auckland"
+//     }]))
+// });
+
+
 
 
 // PUT: Create New Request

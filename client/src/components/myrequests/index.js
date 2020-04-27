@@ -7,7 +7,7 @@ const MyRequests = () => {
     const [requestsFromDB, setRequestsFromDB] = useState([])
     const { isAuthed, user } = useAuth()
 
-    const requestsData = [
+    const [requestsData, setRequestsData] = useState([
         {
             type: "Assistance",
             requestedAt: "08:00",
@@ -44,7 +44,7 @@ const MyRequests = () => {
             address: "10 Dawning Street",
             city: "Auckland"
         }
-    ]
+    ])
 
     //show/hide more details popout
     const showDivFunc = index => {
@@ -53,6 +53,27 @@ const MyRequests = () => {
         : setClickedIndex(index)
     }
     //on render, get the requests from the db
+    // useEffect(() => {
+    //     const { id } = user
+    //     if(!isAuthed) return
+    //     fetch(`api/v1/requests/${id}`)
+    //         .then(res => res.json())
+    //         .then(res => {
+    //             setRequestsFromDB(res)
+    //         })
+    //         .catch(err => console.log(err))
+    // })
+
+    //clicking cancel changes request status to cancelled
+    const cancelReq = index => {
+        setRequestsData(requestsData => 
+            requestsData.map((item, idx) => {
+                if(idx === index) {
+                    item.status = 'Cancelled'
+                }
+                return item
+            }))
+    }
 
     return (
         <div className="requests-container">
@@ -64,14 +85,15 @@ const MyRequests = () => {
                     <span className="column is-one-quarter has-text-weight-bold">Status</span>
                     <span className="column is-one-quarter has-text-weight-bold">Accepted By</span>
                 </div>
-                {requestsData.map((item, idx) => 
+                {requestsData 
+                ? requestsData.map((item, idx) => 
                 <div key={`${idx}${item}`} className={`${item.status === "Accepted" 
                                     ? "has-background-success"
                                     : item.status === "Pending"
                                     ? "has-background-warning"
                                     : item.status === "Completed"
                                     ? "has-background-primary"
-                                    : "has-background-success"}`}>
+                                    : "has-background-grey-lighter"}`}>
                 <button onClick={() => showDivFunc(idx)} key={`${item}${idx}`} className={"button columns is-mobile req-list-item is-marginless is-paddingless"} style={{background: "rgba(255, 255, 255, 0.3)"}}>
                     <span className="column is-one-quarter">{item.type}</span>
                     <span className="column is-one-quarter">{item.requestedAt}</span>
@@ -87,13 +109,13 @@ const MyRequests = () => {
                     <span className="column is-3 has-text-weight-bold has-text-centered">Address: </span>
                     <p className="column is-6 has-text-left">{item.address}, {item.city}</p>
                     {item.status !== "Completed" 
-                    ? <button onClick={() => alert("request for " + item.type + " was cancelled.")} class="column is-2 button is-danger cancel-req-btn">Cancel Request</button>
+                    ? <button onClick={() => cancelReq(idx)} className="column is-2 button is-danger cancel-req-btn">Cancel Request</button>
                     : <div className="column is-2"> </div>}
                     <div className="column is-2"> </div>
                     </div>
                 </div>
-                </div>
-                )}
+                </div>)
+                : <div className="title" style={{margin: "80px auto 0 auto"}}>No requests found</div>}
             </div> 
         </div>
     )

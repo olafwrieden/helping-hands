@@ -3,7 +3,24 @@
     text-align: center;
 }
 
-.req-list {
+.req-list-item {
     height: 70px !important;
-    width: 100%;
+    width: 100%; 
 }
+
+.req-item-popout {
+    padding: 2% 0;
+}
+
+.hide-req-details {
+    display: none;
+    animation: fromTop 0.4s cubic-bezier(0.1, 1.13, 0.83, 1.01) 0s 1 normal;
+}
+
+.show-req-details {
+    display: block;
+    animation: fromTop 0.4s cubic-bezier(0.1, 1.13, 0.83, 1.01) 0s 1 normal;
+}
+
+
+

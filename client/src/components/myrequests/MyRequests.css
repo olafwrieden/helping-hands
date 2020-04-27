@@ -8,14 +8,11 @@
     width: 100%; 
 }
 
-.req-item-popout {
-    padding: 2% 0;
-}
-
 .hide-req-details {
     display: none;
 }
 
 .show-req-details {
     display: block;
+    padding: 2% 0;
 }

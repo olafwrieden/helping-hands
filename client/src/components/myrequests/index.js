@@ -72,7 +72,7 @@ const MyRequests = () => {
                     <span className="column is-one-quarter">{item.status}</span>
                     <span className="column is-one-quarter">{item.acceptedBy}</span>
                 </button>
-                <div className={`req-item-popout ${clickedIndex === idx ? "show-req-details" : "hide-req-details"}`}>
+                <div className={`${clickedIndex === idx ? "show-req-details" : "hide-req-details"}`}>
                     <div className="level columns is-mobile">
                     <span className="column is-one-quarter has-text-weight-bold has-text-centered">Details: </span>
                     <p className="column is-three-quarters has-text-left">{item.details}</p>

@@ -7,44 +7,44 @@ const MyRequests = () => {
     const [requestsFromDB, setRequestsFromDB] = useState([])
     const { isAuthed, user } = useAuth()
 
-    const [requestsData, setRequestsData] = useState([
-        {
-            type: "Assistance",
-            requestedAt: "08:00",
-            status: "Accepted",
-            acceptedBy: "Tom Hardy",
-            details: "I need assistance mowing my lawn please.",
-            address: "3 Example Street",
-            city: "Auckland"
-        },
-        {
-            type: "Pickup",
-            requestedAt: "10:00",
-            status: "Pending",
-            acceptedBy: "N/A",
-            details: "I need 3 carrots, 4 onions and a pumpkin from the grocery store.",
-            address: "5 Test Drive",
-            city: "Auckland"
-        },
-        {
-            type: "Assistance",
-            requestedAt: "09:00",
-            status: "Pending",
-            acceptedBy: "N/A",
-            details: "I need my gutters cleaned out.",
-            address: "21 Jump Street",
-            city: "Auckland"
-        },
-        {
-            type: "Third Party Assistance",
-            requestedAt: "11:30",
-            status: "Completed",
-            acceptedBy: "Jemma Schofield",
-            details: "I am requesting assistance on behalf of my sick Aunt, please pick up some panadol for her.",
-            address: "10 Dawning Street",
-            city: "Auckland"
-        }
-    ])
+    // const [requestsData, setRequestsData] = useState([
+    //     {
+    //         type: "Assistance",
+    //         requestedAt: "08:00",
+    //         status: "Accepted",
+    //         acceptedBy: "Tom Hardy",
+    //         details: "I need assistance mowing my lawn please.",
+    //         address: "3 Example Street",
+    //         city: "Auckland"
+    //     },
+    //     {
+    //         type: "Pickup",
+    //         requestedAt: "10:00",
+    //         status: "Pending",
+    //         acceptedBy: "N/A",
+    //         details: "I need 3 carrots, 4 onions and a pumpkin from the grocery store.",
+    //         address: "5 Test Drive",
+    //         city: "Auckland"
+    //     },
+    //     {
+    //         type: "Assistance",
+    //         requestedAt: "09:00",
+    //         status: "Pending",
+    //         acceptedBy: "N/A",
+    //         details: "I need my gutters cleaned out.",
+    //         address: "21 Jump Street",
+    //         city: "Auckland"
+    //     },
+    //     {
+    //         type: "Third Party Assistance",
+    //         requestedAt: "11:30",
+    //         status: "Completed",
+    //         acceptedBy: "Jemma Schofield",
+    //         details: "I am requesting assistance on behalf of my sick Aunt, please pick up some panadol for her.",
+    //         address: "10 Dawning Street",
+    //         city: "Auckland"
+    //     }
+    // ])
 
     //show/hide more details popout
     const showDivFunc = index => {
@@ -53,31 +53,34 @@ const MyRequests = () => {
         : setClickedIndex(index)
     }
     //on render, get the requests from the db
-    // useEffect(() => {
-    //     const { id } = user
-    //     if(!isAuthed) return
-    //     fetch(`api/v1/requests/${id}`)
-    //         .then(res => res.json())
-    //         .then(res => {
-    //             setRequestsFromDB(res)
-    //         })
-    //         .catch(err => console.log(err))
-    // })
+    //works but is buggy: server
+    useEffect(() => {
+        const { id } = user
+        if(!isAuthed) return
+        fetch(`api/v1/requests/${id}`)
+            .then(res => res.json())
+            .then(res => {
+                setRequestsFromDB(res)
+            })
+            .catch(err => console.log(err))
+    })
 
     //clicking cancel changes request status to cancelled
     const cancelReq = index => {
-        setRequestsData(requestsData => 
-            requestsData.map((item, idx) => {
-                if(idx === index) {
-                    item.status = 'Cancelled'
-                }
-                return item
-            }))
+        // setRequestsData(requestsData => 
+        //     requestsData.map((item, idx) => {
+        //         if(idx === index) {
+        //             item.status = 'Cancelled'
+        //         }
+        //         return item
+        //     }))
     }
 
     return (
         <div className="requests-container">
             <h2 className="title is-3">My Requests</h2>
+            {requestsFromDB.length > 0
+            ?
             <div className="card req-subcontainer">
                 <div className="level columns is-mobile req-title-row is-marginless is-paddingless">
                     <span className="column is-one-quarter has-text-weight-bold">Type</span>
@@ -85,8 +88,7 @@ const MyRequests = () => {
                     <span className="column is-one-quarter has-text-weight-bold">Status</span>
                     <span className="column is-one-quarter has-text-weight-bold">Accepted By</span>
                 </div>
-                {requestsData 
-                ? requestsData.map((item, idx) => 
+                {requestsFromDB.map((item, idx) => 
                 <div key={`${idx}${item}`} className={`${item.status === "Accepted" 
                                     ? "has-background-success"
                                     : item.status === "Pending"
@@ -114,9 +116,9 @@ const MyRequests = () => {
                     <div className="column is-2"> </div>
                     </div>
                 </div>
-                </div>)
-                : <div className="title" style={{margin: "80px auto 0 auto"}}>No requests found</div>}
+                </div>)}
             </div> 
+            : <div className="title" style={{margin: "80px auto 0 auto"}}>No requests found</div>}
         </div>
     )
 }

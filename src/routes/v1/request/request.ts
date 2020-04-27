@@ -28,7 +28,7 @@ router.get("/:id", async (req, res) => {
       .createQueryBuilder("request")
       .select("request")
       .where("request.requestedUser = :id", { id })
-      .getMany()
+      .getOne()
     return res.send(requests);
   } else {
     res.status(401).send({ message: "Not Authorized" });
@@ -78,7 +78,10 @@ router.get("/:id", async (req, res) => {
 // });
 
 
-
+//cancel a request
+router.put('/cancel', (req, res) => {
+  
+})
 
 // PUT: Create New Request
 const requestSubmissionRules = () => {

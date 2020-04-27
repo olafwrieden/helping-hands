@@ -59,8 +59,14 @@ const MyRequests = () => {
                     <span className="column is-one-quarter has-text-weight-bold">Accepted By</span>
                 </div>
                 {requestsData.map((item, idx) => 
-                <div>
-                <button onClick={() => showDivFunc(idx)} key={`${item}${idx}`} className="button columns is-mobile req-list-item is-marginless is-paddingless">
+                <div className={`${item.type === "Assistance" 
+                                    ? "has-background-primary"
+                                    : item.type === "Third Party Assistance"
+                                    ? "has-background-info"
+                                    : item.type === "Pickup"
+                                    ? "has-background-warning"
+                                    : "has-background-success"}`}>
+                <button onClick={() => showDivFunc(idx)} key={`${item}${idx}`} className={"button columns is-mobile req-list-item is-marginless is-paddingless"} style={{background: "rgba(255, 255, 255, 0.3)"}}>
                     <span className="column is-one-quarter">{item.type}</span>
                     <span className="column is-one-quarter">{item.requestedAt}</span>
                     <span className="column is-one-quarter">{item.status}</span>

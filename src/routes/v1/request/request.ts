@@ -8,7 +8,7 @@ let router = Router();
 
 // GET: All Requests that have been accepted 
 router.get("/", async (req, res) => {
-  if (!req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     const requests = await getRequestRepo()
       .createQueryBuilder("request")
       .loadAllRelationIds()
@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 // get requests for currently logged in user
 router.get("/:id", async (req, res) => {
   const { id } = req.params
-  if (!req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     const requests = await getRequestRepo()
       .createQueryBuilder("request")
       .where("request.requestedUser = :id", { id })
@@ -49,7 +49,7 @@ const requestCancelRules = () => {
 //cancel a request
 router.put('/cancel', requestCancelRules(), validate, async (req, res) => {
   const { id, requestedUser } = req.body
-  if(!req.isAuthenticated()) {
+  if(req.isAuthenticated()) {
     try {
       const dbres = await getRequestRepo()
       .createQueryBuilder()

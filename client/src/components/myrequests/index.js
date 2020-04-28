@@ -81,7 +81,8 @@ const MyRequests = () => {
         .then(res => res.json())
         .then(res => {
             console.log('requests array, ', res)
-            setRequestsFromDB(res)
+            const { requests } = res
+            setRequestsFromDB(requests)
         })
         .catch(err => console.log(err))
     }

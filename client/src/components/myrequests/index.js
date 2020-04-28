@@ -59,19 +59,31 @@ const MyRequests = () => {
         if(!isAuthed) return
         fetch(`api/v1/requests/${id}`)
             .then(res => res.json())
-            .then(res => setRequestsFromDB(res))
+            .then(res => {
+                console.log('requests array, ', res)
+                setRequestsFromDB(res)
+            })
             .catch(err => console.log(err))
     }, [])
 
     //clicking cancel changes request status to cancelled
-    const cancelReq = index => {
-        // setRequestsData(requestsData => 
-        //     requestsData.map((item, idx) => {
-        //         if(idx === index) {
-        //             item.status = 'Cancelled'
-        //         }
-        //         return item
-        //     }))
+    const cancelReq = item => {
+        item.requestedUser = user.id
+        if(!isAuthed) return
+        fetch('api/v1/requests/cancel', {
+            method: "PUT",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(item),
+          })
+        .then(res => res.json())
+        .then(res => {
+            console.log('requests array, ', res)
+            setRequestsFromDB(res)
+        })
+        .catch(err => console.log(err))
     }
 
     return (
@@ -108,8 +120,8 @@ const MyRequests = () => {
                     <div className="level columns is-mobile">
                     <span className="column is-3 has-text-weight-bold has-text-centered">Address: </span>
                     <p className="column is-6 has-text-left">{item.address}, {item.city}</p>
-                    {item.status !== "complete"  
-                    ? <button onClick={() => cancelReq(idx)} className="column is-2 button is-danger cancel-req-btn">Cancel Request</button>
+                    {item.status !== "complete" || item.status !== "cancelled"
+                    ? <button onClick={() => cancelReq(item)} className="column is-2 button is-danger cancel-req-btn">Cancel Request</button>
                     : <div className="column is-2"> </div>}
                     <div className="column is-2"> </div>
                     </div>

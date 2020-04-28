@@ -6,7 +6,7 @@ import { validate } from '../../../../middleware/validator';
 
 let router = Router();
 
-// GET: All Requests
+// GET: All Requests that have been accepted 
 router.get("/", async (req, res) => {
   if (!req.isAuthenticated()) {
     const requests = await getRequestRepo()
@@ -26,7 +26,6 @@ router.get("/:id", async (req, res) => {
   if (req.isAuthenticated()) {
     const requests = await getRequestRepo()
       .createQueryBuilder("request")
-      .select("request")
       .where("request.requestedUser = :id", { id })
       .getMany()
     return res.send(requests);
@@ -76,11 +75,44 @@ router.get("/:id", async (req, res) => {
 //         city: "Auckland"
 //     }]))
 // });
-
+const requestCancelRules = () => {
+  return [
+    body("type").exists().isIn(['assist', 'pickup', 'talk', 'tpa']),
+    body("status").exists().isIn(['complete', 'pending', 'accepted']),
+    body("details").exists(),
+    body("address").exists(),
+    body("city").exists(),
+    body("zipCode").exists(),
+    body("requestedUser").exists()
+  ];
+};
 
 //cancel a request
-router.put('/cancel', (req, res) => {
-  
+router.put('/cancel', requestCancelRules(), validate, async (req, res) => {
+  const { id } = req.body
+  if(!req.isAuthenticated()) {
+    try {
+      const dbres = await getRequestRepo()
+      .createQueryBuilder()
+      .update(Request)
+      .set({status: "cancelled"})
+      .where("id = :id", { id })
+      .execute()
+      console.log('res from cancel query, ', dbres)
+      const requests = await getRequestRepo()
+          .createQueryBuilder("request")
+          .where("request.requestedUser = :id", { id })
+          .getMany()
+      console.log('res from get requests query, ', requests)
+      res.status(200).send({ message: "The request was successfully cancelled.", requests });
+    }
+    catch (err) {
+      console.log(err)
+      res.status(500).send({ error: "Attempt to cancel request was unsuccessful." })
+    }
+  } else {
+    res.status(401).send({ error: "Not Authorized" });
+  }
 })
 
 // PUT: Create New Request

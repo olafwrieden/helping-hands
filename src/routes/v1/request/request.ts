@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 // get requests for currently logged in user
 router.get("/:id", async (req, res) => {
   const { id } = req.params
-  if (req.isAuthenticated()) {
+  if (!req.isAuthenticated()) {
     const requests = await getRequestRepo()
       .createQueryBuilder("request")
       .where("request.requestedUser = :id", { id })
@@ -34,47 +34,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// mock response
-
-// router.get("/:id", async (req, res) => {
-//   return (res.send([
-//     {
-//         type: "Assistance",
-//         requestedAt: "08:00",
-//         status: "Accepted",
-//         acceptedBy: "Tom Hardy",
-//         details: "I need assistance mowing my lawn please.",
-//         address: "3 Example Street",
-//         city: "Auckland"
-//     },
-//     {
-//         type: "Pickup",
-//         requestedAt: "10:00",
-//         status: "Pending",
-//         acceptedBy: "N/A",
-//         details: "I need 3 carrots, 4 onions and a pumpkin from the grocery store.",
-//         address: "5 Test Drive",
-//         city: "Auckland"
-//     },
-//     {
-//         type: "Assistance",
-//         requestedAt: "09:00",
-//         status: "Pending",
-//         acceptedBy: "N/A",
-//         details: "I need my gutters cleaned out.",
-//         address: "21 Jump Street",
-//         city: "Auckland"
-//     },
-//     {
-//         type: "Third Party Assistance",
-//         requestedAt: "11:30",
-//         status: "Completed",
-//         acceptedBy: "Jemma Schofield",
-//         details: "I am requesting assistance on behalf of my sick Aunt, please pick up some panadol for her.",
-//         address: "10 Dawning Street",
-//         city: "Auckland"
-//     }]))
-// });
 const requestCancelRules = () => {
   return [
     body("type").exists().isIn(['assist', 'pickup', 'talk', 'tpa']),
@@ -89,7 +48,7 @@ const requestCancelRules = () => {
 
 //cancel a request
 router.put('/cancel', requestCancelRules(), validate, async (req, res) => {
-  const { id } = req.body
+  const { id, requestedUser } = req.body
   if(!req.isAuthenticated()) {
     try {
       const dbres = await getRequestRepo()
@@ -100,11 +59,11 @@ router.put('/cancel', requestCancelRules(), validate, async (req, res) => {
       .execute()
       console.log('res from cancel query, ', dbres)
       const requests = await getRequestRepo()
-          .createQueryBuilder("request")
-          .where("request.requestedUser = :id", { id })
-          .getMany()
-      console.log('res from get requests query, ', requests)
-      res.status(200).send({ message: "The request was successfully cancelled.", requests });
+        .createQueryBuilder("request")
+        .where("request.requestedUser = :requestedUser", { requestedUser })
+        .getMany()
+        console.log(requests)
+      return res.status(200).send({ message: "The request was successfully cancelled.", requests });
     }
     catch (err) {
       console.log(err)

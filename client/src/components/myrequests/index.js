@@ -7,45 +7,6 @@ const MyRequests = () => {
     const [requestsFromDB, setRequestsFromDB] = useState([])
     const { isAuthed, user } = useAuth()
 
-    // const [requestsData, setRequestsData] = useState([
-    //     {
-    //         type: "Assistance",
-    //         requestedAt: "08:00",
-    //         status: "Accepted",
-    //         acceptedBy: "Tom Hardy",
-    //         details: "I need assistance mowing my lawn please.",
-    //         address: "3 Example Street",
-    //         city: "Auckland"
-    //     },
-    //     {
-    //         type: "Pickup",
-    //         requestedAt: "10:00",
-    //         status: "Pending",
-    //         acceptedBy: "N/A",
-    //         details: "I need 3 carrots, 4 onions and a pumpkin from the grocery store.",
-    //         address: "5 Test Drive",
-    //         city: "Auckland"
-    //     },
-    //     {
-    //         type: "Assistance",
-    //         requestedAt: "09:00",
-    //         status: "Pending",
-    //         acceptedBy: "N/A",
-    //         details: "I need my gutters cleaned out.",
-    //         address: "21 Jump Street",
-    //         city: "Auckland"
-    //     },
-    //     {
-    //         type: "Third Party Assistance",
-    //         requestedAt: "11:30",
-    //         status: "Completed",
-    //         acceptedBy: "Jemma Schofield",
-    //         details: "I am requesting assistance on behalf of my sick Aunt, please pick up some panadol for her.",
-    //         address: "10 Dawning Street",
-    //         city: "Auckland"
-    //     }
-    // ])
-
     //show/hide more details popout
     const showDivFunc = index => {
         return clickedIndex === index 
@@ -53,7 +14,6 @@ const MyRequests = () => {
         : setClickedIndex(index)
     }
     //on render, get the requests from the db
-    //works but is buggy: server
     useEffect(() => {
         const { id } = user
         if(!isAuthed) return

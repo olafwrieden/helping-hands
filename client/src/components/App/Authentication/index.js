@@ -23,9 +23,9 @@ function useProvideAuth() {
     email: 'example@mail.com',
     bio: 'I am a passionate volunteer keen to enhance the connectivity in my local community and provide volunteer help to those in need.',
     phone: '0212223333',
-    address: '3 Pleasant Crescent',
+    address: '33 albert street',
     city: 'Auckland',
-    zipCode: 1441,
+    zipCode: 1010,
     isVolunteer: true,
     ratings: [4, 5, 4, 4, 5, 5]
   })}, []);

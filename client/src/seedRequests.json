@@ -1,0 +1,52 @@
+{
+    "requests": [
+            {
+                "type": "Assistance",
+                "requestedAt": "08:00",
+                "status": "Accepted",
+                "requestedUser": "Mandy Emmets",
+                "fulfillingUser": "Tom Hardy",
+                "details": "I need assistance mowing my lawn please.",
+                "payment": "nopayment",
+                "address": "30 Wyndham Street",
+                "city": "Auckland",
+                "zipCode": "1010"
+            },
+            {
+                "type": "Pickup",
+                "requestedAt": "10:00",
+                "status": "pending",
+                "requestedUser": "Molly Tiller",
+                "fulfillingUser": "N/A",
+                "details": "I need 3 carrots, 4 onions and a pumpkin from the grocery store.",
+                "payment": "cash",
+                "address": "53 Albert Street",
+                "city": "Auckland",
+                "zipCode": "1010"
+            },
+            {
+                "type": "Assistance",
+                "requestedAt": "09:00",
+                "status": "pending",
+                "requestedUser": "Jonathon Sheers",
+                "fulfillingUser": "N/A",
+                "details": "I need my gutters cleaned.",
+                "payment": "nopayment",
+                "address": "1 Shortland Street",
+                "city": "Auckland",
+                "zipCode": "1010"
+            },
+            {
+                "type": "Third Party Assistance",
+                "requestedAt": "11:30",
+                "status": "Completed",
+                "requestedUser": "Jim Bull",
+                "fulfillingUser": "Jemma Schofield",
+                "details": "I am requesting assistance on behalf of my sick Aunt, please pick up some panadol for her.",
+                "payment": "credit",
+                "address": "19 Swanson Street",
+                "city": "Auckland",
+                "zipCode": "1010"
+            }
+        ]
+}

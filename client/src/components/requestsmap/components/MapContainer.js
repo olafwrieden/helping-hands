@@ -12,7 +12,7 @@ const style = {
     transform: 'TranslateX(0)'
   }
 
-const MapContainer = ({pinsArr, google}) => {
+const MapContainer = ({pinsArr, google, pinClickHandler}) => {
     const { user } = useAuth();
     const {address, city, zipCode} = user
     const [userCoordinates, setUserCoordinates] = useState({initLat: null, initLng: null})
@@ -30,7 +30,6 @@ const MapContainer = ({pinsArr, google}) => {
             await pinsArr.map(async item => {
                 const fetchGeocoder = await Geocode.fromAddress(`${item.address}, ${item.city}, ${item.zipCode}`)
                 const { lat, lng } = fetchGeocoder.results[0].geometry.location
-                console.log("coordinates for item in array, ", lat, lng)
                 item.coords = {lat, lng}
                 geocodeArray.push(item)
                 setCoordsArray([...coordsArray, ...geocodeArray])
@@ -41,7 +40,6 @@ const MapContainer = ({pinsArr, google}) => {
         }
         geoCoder()
     }, [])
-    coordsArray.length === 2 && console.log(coordsArray)
     return (
         <>
         {initLat && <Map 
@@ -52,7 +50,7 @@ const MapContainer = ({pinsArr, google}) => {
         {
             coordsArray.length > 0 && 
             coordsArray.map((item, idx) => 
-                <Marker key={`${item}${idx}`} position={item.coords} />
+                <Marker onClick={() => pinClickHandler(item)} key={`${item}${idx}`} position={item.coords} />
             )
         }
         {/* <Marker position={{lat: 37.778519, lng: -122.405640}} /> */}

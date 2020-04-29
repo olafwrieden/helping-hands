@@ -8,6 +8,7 @@ import BuddyList from "../../BuddyList";
 import Register from "../../Register";
 import Request from "../../Request";
 import MyRequests from "../../myrequests"
+import RequestsMap from '../../requestsmap'
 
 const Router = () => (
   <main>
@@ -20,6 +21,7 @@ const Router = () => (
       <ProtectedRoute path="/profile" component={Profile} />
       <ProtectedRoute path="/buddies" component={BuddyList} />
       <ProtectedRoute path="/myrequests" component={MyRequests} />
+      <ProtectedRoute path="/requestsmap" component={RequestsMap} />
       <Route component={NotFound} />
     </Switch>
   </main>

@@ -1,0 +1,12 @@
+.requests-map-div {
+    padding-top: 100px;
+    height: 100vh;
+}
+
+.map-component-wrapper {
+    position: relative;
+    height: 80vh;
+    max-height: 80%;
+    width: 100%;
+    margin: 0 auto;
+}

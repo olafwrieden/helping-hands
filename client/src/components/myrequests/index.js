@@ -111,7 +111,7 @@ const MyRequests = () => {
                     <span className="column is-one-quarter">{item.type}</span>
                     <span className="column is-one-quarter">{item.requestedAt}</span>
                     <span className="column is-one-quarter">{item.status}</span>
-                    <span className="column is-one-quarter">{item.acceptedBy}</span>
+                    <span className="column is-one-quarter">{`${item.fulfillingUser ? item.fulfillingUser : ''}`}</span>
                 </button>
                 <div className={`${clickedIndex === idx ? "show-req-details" : "hide-req-details"}`}>
                     <div className="level columns is-mobile">

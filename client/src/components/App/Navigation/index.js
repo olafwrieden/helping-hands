@@ -59,6 +59,15 @@ const Navigation = () => {
                   </p>
                   <p className="control">
                     <Link
+                      className="button is-primary is-outlined"
+                      to="/requestsmap"
+                      onClick={() => setIsActive(false)}
+                    >
+                      Nearby requests
+                    </Link>
+                  </p>
+                  <p className="control">
+                    <Link
                       onClick={() => setIsActive(false)}
                       className="button is-primary is-outlined"
                       to="/buddies"

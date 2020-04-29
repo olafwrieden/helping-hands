@@ -17,13 +17,14 @@ const MapContainer = (props) => {
     //placeholder:
     const akl = {
         lat: -36.848461,
-        long: 174.763336
+        lng: 174.763336
     }
+    const { lat, lng } = akl
     return (
         <Map 
             google={props.google} 
             zoom={13}  
-            initialCenter={{lat: akl.lat, lng: akl.long}}
+            initialCenter={{lat, lng}}
             style={style}>
  
         {/* <Marker position={{lat: 37.778519, lng: -122.405640}} /> */}

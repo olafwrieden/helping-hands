@@ -3,7 +3,7 @@ import '../RequestsMap.css'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
 import { useAuth } from '../../App/Authentication'
 import Geocode from 'react-geocode'
-Geocode.setApiKey('AIzaSyALJlUnHvzueMf92A0kFkVnxl24GW_xTDU')
+Geocode.setApiKey('')
 
 
 const style = {

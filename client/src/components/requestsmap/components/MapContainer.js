@@ -26,20 +26,22 @@ const MapContainer = ({pinsArr, google}) => {
             const fetchGeocode = await Geocode.fromAddress(`${address}, ${city}, ${zipCode}`)
             const { lat, lng } = fetchGeocode.results[0].geometry.location
             setUserCoordinates({initLat: lat, initLng: lng})
-            const requestsCoords = pinsArr.map(async item => {
-                const fetchGeocoder = await Geocode.fromAddress(`${address}, ${city}, ${zipCode}`)
+            const geocodeArray = []
+            await pinsArr.map(async item => {
+                const fetchGeocoder = await Geocode.fromAddress(`${item.address}, ${item.city}, ${item.zipCode}`)
                 const { lat, lng } = fetchGeocoder.results[0].geometry.location
-                return item.coords = {lat, lng}
-            }) 
-            setCoordsArray(requestsCoords)
-
+                console.log("coordinates for item in array, ", lat, lng)
+                item.coords = {lat, lng}
+                geocodeArray.push(item)
+                setCoordsArray([...coordsArray, ...geocodeArray])
+            })
             } catch(err) {
                 console.log(err)
             }
         }
         geoCoder()
     }, [])
-    
+    coordsArray.length === 2 && console.log(coordsArray)
     return (
         <>
         {initLat && <Map 

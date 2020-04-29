@@ -27,7 +27,8 @@
                 "fulfillingUser": "N/A",
                 "details": "I need my gutters cleaned.",
                 "address": "1 Shortland Street",
-                "city": "Auckland"
+                "city": "Auckland",
+                "zipCode": "1010"
             },
             {
                 "type": "Third Party Assistance",
@@ -36,7 +37,8 @@
                 "fulfillingUser": "Jemma Schofield",
                 "details": "I am requesting assistance on behalf of my sick Aunt, please pick up some panadol for her.",
                 "address": "19 Swanson Street",
-                "city": "Auckland"
+                "city": "Auckland",
+                "zipCode": "1010"
             }
         ]
 }
